@@ -59,6 +59,16 @@ module Api
           render json: { success: false }
         end
       end
+
+      def index_by_tag
+        tag = Tag.find_by(id: params[:id])
+        return render json: { error: 'No se encontro el tag.' }, 
+        status: :not_found if !tag
+
+
+        @services = tag.services.order(created: :asc)
+        render 'api/services/index', status: :ok
+      end
   
       private
   

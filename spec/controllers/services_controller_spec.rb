@@ -125,4 +125,45 @@ RSpec.describe Api::ServicesController, type: :controller do
       }.to_json)
     end
   end
+
+  context 'GET /tags/:id/services' do
+    it 'renders all services under a tag' do
+      user = FactoryBot.create(:user)
+      session = user.sessions.create
+      @request.cookie_jar.signed['light_rodeo_session_token'] = session.token
+
+      tag1 = FactoryBot.create(:tag)
+      tag2 = FactoryBot.create(:tag, english_name: 'Mechanical Bull', nombre_espanol: 'Toro Mecanico')
+
+      service1 = FactoryBot.create(:service, user: user)
+      service2 = FactoryBot.create(:service, user: user)
+      service3 = FactoryBot.create(:service, user: user)
+
+      taggable1 = FactoryBot.create(:taggable, service: service1, tag: tag1)
+      taggable2 = FactoryBot.create(:taggable, service: service2, tag: tag2)
+      taggable3 = FactoryBot.create(:taggable, service: service3, tag: tag1)
+
+      get :index_by_tag, params: { id: tag1.id }
+
+      expect(response.body).to eq({
+        services: [{
+          id: service1.id,
+          english_name: service1.english_name,
+          nombre_espanol: service1.nombre_espanol,
+          english_description: service1.english_description,
+          descripcion_espanol: service1.descripcion_espanol,
+          dimensions: service1.dimensions,
+          service_type: service1.service_type
+        },{          
+          id: service3.id,
+          english_name: service3.english_name,
+          nombre_espanol: service3.nombre_espanol,
+          english_description: service3.english_description,
+          descripcion_espanol: service3.descripcion_espanol,
+          dimensions: service3.dimensions,
+          service_type: service3.service_type
+        }]
+      }.to_json)
+    end
+  end
 end
