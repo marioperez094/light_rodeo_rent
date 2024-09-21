@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_09_20_121126) do
+ActiveRecord::Schema.define(version: 2024_09_21_031905) do
 
   create_table "services", force: :cascade do |t|
     t.string "english_name"
@@ -33,6 +33,16 @@ ActiveRecord::Schema.define(version: 2024_09_20_121126) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "taggables", force: :cascade do |t|
+    t.integer "service_id"
+    t.integer "tag_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["service_id", "tag_id"], name: "index_taggables_on_service_id_and_tag_id", unique: true
+    t.index ["service_id"], name: "index_taggables_on_service_id"
+    t.index ["tag_id"], name: "index_taggables_on_tag_id"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "english_name"
     t.string "nombre_espanol"
@@ -49,4 +59,6 @@ ActiveRecord::Schema.define(version: 2024_09_20_121126) do
 
   add_foreign_key "services", "users"
   add_foreign_key "sessions", "users"
+  add_foreign_key "taggables", "services"
+  add_foreign_key "taggables", "tags"
 end

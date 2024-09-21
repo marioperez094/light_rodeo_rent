@@ -8,9 +8,16 @@ Rails.application.routes.draw do
     resources :services, only: [:create, :index, :show, :update, :destroy]
     resources :services, only: [:create, :index, :show, :update, :destroy]
     resources :tags, only: [:create, :index, :show, :update]
+    resources :taggables, only: [:create, :destroy]
 
     #Sessions API
     get '/authenticated' => 'sessions#authenticated'
     delete '/sessions' => 'sessions#destroy'
+
+    #Services under a Tag
+    get '/tags/:id/services' => 'services#index_by_tag'
+
+    #Tags under a service
+    get '/services/:id/tags' => 'tags#index_by_service'
   end
 end

@@ -29,7 +29,7 @@ RSpec.describe 'Route definition', :type => :routing do
     expect(:put => '/api/services/:id').to route_to(:controller => 'api/services', :action => 'update', :id => ':id')
   end
   
-  it 'of DELETE /services' do
+  it 'of DELETE /services/:id' do
     expect(:delete => '/api/services/:id').to route_to(:controller => 'api/services', :action => 'destroy', :id => ':id')
   end
 
@@ -43,5 +43,13 @@ RSpec.describe 'Route definition', :type => :routing do
 
   it 'of PUT /tags' do
     expect(:put => '/api/tags/:id').to route_to(:controller => 'api/tags', :action => 'update', :id => ':id')
+  end
+
+  it 'of POST /taggables' do
+    expect(:post => '/api/taggables').to route_to(:controller => 'api/taggables', :action => 'create')
+  end
+
+  it 'of DELETE /taggables/:id' do
+    expect(:delete => '/api/taggables/:id').to route_to(:controller => 'api/taggables', :action => 'destroy', :id => ':id')
   end
 end

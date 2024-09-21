@@ -111,7 +111,14 @@ RSpec.describe Service, type: :model do
       expect {
         user = FactoryBot.create(:user)
         FactoryBot.create(:service, dimensions: nil, user: user)
-      }
+      }.not_to raise_error(ActiveRecord::RecordInvalid)
+    end
+
+    it 'must have dimensions if inflatable type' do
+      expect {
+        user = FactoryBot.create(:user)
+        FactoryBot.create(:service, service_type: 'Inflatable', dimensions: nil, user: user)
+      }.to raise_error(ActiveRecord::RecordInvalid)
     end
   end
 end
