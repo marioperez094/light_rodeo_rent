@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  def home
-    render 'home'
+  def admin
+    render 'admin'
   end
 end

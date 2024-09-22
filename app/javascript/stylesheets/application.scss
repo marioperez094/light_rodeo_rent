@@ -1,1 +1,22 @@
 @import "bootstrap";
+
+@import "@stylesheets/variables.scss";
+
+.container-fluid {
+  max-width: 1920px;
+}
+
+.heading-text {
+  color: black;
+  font-family: $brand-font;
+}
+
+.text-outline {
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+}
+
+.aspect-ratio {
+  padding-top: calc(2 / 3 * 100%);
+  background-size: cover;
+  background-position: center;
+}

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: 'static_pages#home'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  get '/admin' => 'static_pages#admin'
 
   namespace :api do
     resources :users, only: [:create]

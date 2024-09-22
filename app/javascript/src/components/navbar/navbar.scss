@@ -1,0 +1,9 @@
+@import "@stylesheets/variables.scss";
+
+nav {
+  background-color: rgb(0, 0, 0);
+
+  .navbar-brand, .nav-link, .navbar-toggler {
+    color: white !important;
+  }
+}
