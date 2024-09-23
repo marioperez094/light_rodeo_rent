@@ -6,6 +6,10 @@
   max-width: 1920px;
 }
 
+.pointer-link:hover {
+  cursor: pointer;
+}
+
 .heading-text {
   color: black;
   font-family: $brand-font;

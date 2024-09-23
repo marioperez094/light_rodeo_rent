@@ -1,5 +1,7 @@
 //External Imports
 import React, { ReactNode } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 //Stylesheet
 import "./navbar.scss";
@@ -25,14 +27,17 @@ export function ExpandableMenu({ children } : { children: ReactNode}) {
         aria-controls="navbarSupportedContent" 
         aria-expanded="false" 
         aria-label="Toggle navigation"
+        id="navbarMenuToggler"
       >
-        <span className="navbar-toggler-icon" />
+        <FontAwesomeIcon
+          icon={ faBars }
+        />
       </button>
       <div 
         className="collapse navbar-collapse"
         id="navbarSupportedContent"
       >
-        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul className="navbar-nav me-auto ms-auto mb-2 mb-lg-0" id="navbarMenu">
           { children }
         </ul>
       </div>
@@ -50,7 +55,7 @@ export function NavItem({
   return (
     <li className="nav-item">
       <a
-        className="nav-link me-3"
+        className="nav-link mx-3"
         href={ link }
       >
         { title }

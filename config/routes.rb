@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root to: 'static_pages#home'
 
   get '/admin' => 'static_pages#admin'
+  get '/admin/login' => 'static_pages#login'
 
   namespace :api do
     resources :users, only: [:create]
