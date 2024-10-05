@@ -5,4 +5,10 @@ class ApplicationController < ActionController::Base
       session = Session.find_by(token: token)
       session
     end
+
+    def admin_check
+      unless current_session
+        return redirect_to '/admin/login'
+      end
+    end
   end

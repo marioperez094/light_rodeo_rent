@@ -18,17 +18,17 @@ RSpec.describe Api::ServicesController, type: :controller do
         services: [{
           id: service1.id,
           english_name: 'The Jacarandoso',
-          nombre_espanol: 'El Jacarandoso',
+          spanish_name: 'El Jacarandoso',
           english_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
-          descripcion_espanol: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
+          spanish_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
           dimensions: '13.5x13.5',
           service_type: 'Mechanical Bull'
         }, {
           id: service2.id,
           english_name: 'The Jacarandoso',
-          nombre_espanol: 'El Jacarandoso',
+          spanish_name: 'El Jacarandoso',
           english_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
-          descripcion_espanol: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
+          spanish_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
           dimensions: '13.5x13.5',
           service_type: 'Mechanical Bull'
         }]
@@ -49,9 +49,9 @@ RSpec.describe Api::ServicesController, type: :controller do
         service: {
           id: service2.id,
           english_name: 'The Jacarandoso',
-          nombre_espanol: 'El Jacarandoso',
+          spanish_name: 'El Jacarandoso',
           english_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
-          descripcion_espanol: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
+          spanish_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
           dimensions: '18.5x18.5',
           service_type: 'Mechanical Bull'
         }
@@ -68,9 +68,9 @@ RSpec.describe Api::ServicesController, type: :controller do
       post :create, params: {
         service: {
           english_name: 'The Jacarandoso',
-          nombre_espanol: 'El Jacarandoso',
+          spanish_name: 'El Jacarandoso',
           english_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
-          descripcion_espanol: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
+          spanish_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
           dimensions: '13.5x13.5',
           service_type: 'Mechanical Bull'
         }
@@ -82,9 +82,9 @@ RSpec.describe Api::ServicesController, type: :controller do
         service: {
           id: 1,
           english_name: 'The Jacarandoso',
-          nombre_espanol: 'El Jacarandoso',
+          spanish_name: 'El Jacarandoso',
           english_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
-          descripcion_espanol: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
+          spanish_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
           dimensions: '13.5x13.5', 
           service_type: 'Mechanical Bull'
         }
@@ -104,9 +104,9 @@ RSpec.describe Api::ServicesController, type: :controller do
         service: {
           id: service.id,
           english_name: 'The Jacarandoso',
-          nombre_espanol: 'El Jacarandoso',
+          spanish_name: 'El Jacarandoso',
           english_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
-          descripcion_espanol: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
+          spanish_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
           dimensions: '13.5x14.5',
           service_type: 'Mechanical Bull'
         }
@@ -116,9 +116,9 @@ RSpec.describe Api::ServicesController, type: :controller do
         service: {
           id: 1,
           english_name: 'The Jacarandoso',
-          nombre_espanol: 'El Jacarandoso',
+          spanish_name: 'El Jacarandoso',
           english_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
-          descripcion_espanol: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
+          spanish_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
           dimensions: '13.5x14.5',
           service_type: 'Mechanical Bull'
         }
@@ -133,7 +133,7 @@ RSpec.describe Api::ServicesController, type: :controller do
       @request.cookie_jar.signed['light_rodeo_session_token'] = session.token
 
       tag1 = FactoryBot.create(:tag)
-      tag2 = FactoryBot.create(:tag, english_name: 'Mechanical Bull', nombre_espanol: 'Toro Mecanico')
+      tag2 = FactoryBot.create(:tag, english_name: 'Mechanical Bull', spanish_name: 'Toro Mecanico')
 
       service1 = FactoryBot.create(:service, user: user)
       service2 = FactoryBot.create(:service, user: user)
@@ -149,17 +149,17 @@ RSpec.describe Api::ServicesController, type: :controller do
         services: [{
           id: service1.id,
           english_name: service1.english_name,
-          nombre_espanol: service1.nombre_espanol,
+          spanish_name: service1.spanish_name,
           english_description: service1.english_description,
-          descripcion_espanol: service1.descripcion_espanol,
+          spanish_description: service1.spanish_description,
           dimensions: service1.dimensions,
           service_type: service1.service_type
         },{          
           id: service3.id,
           english_name: service3.english_name,
-          nombre_espanol: service3.nombre_espanol,
+          spanish_name: service3.spanish_name,
           english_description: service3.english_description,
-          descripcion_espanol: service3.descripcion_espanol,
+          spanish_description: service3.spanish_description,
           dimensions: service3.dimensions,
           service_type: service3.service_type
         }]

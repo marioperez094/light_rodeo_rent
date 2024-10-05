@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   root to: 'static_pages#home'
 
+  #Admin pages
   get '/admin' => 'static_pages#admin'
   get '/admin/login' => 'static_pages#login'
+  get '/admin/services' => 'static_pages#admin_services'
+  get 'admin/tags' => 'static_pages#admin_tags'
 
   namespace :api do
     resources :users, only: [:create]
@@ -22,4 +25,7 @@ Rails.application.routes.draw do
     #Tags under a service
     get '/services/:id/tags' => 'tags#index_by_service'
   end
+
+  #Redirects react-router links on reload 
+  get "/admin/services/*path" => redirect('/admin/services')
 end

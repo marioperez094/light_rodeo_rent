@@ -14,9 +14,9 @@ ActiveRecord::Schema.define(version: 2024_09_21_031905) do
 
   create_table "services", force: :cascade do |t|
     t.string "english_name"
-    t.string "nombre_espanol"
+    t.string "spanish_name"
     t.string "english_description"
-    t.string "descripcion_espanol"
+    t.string "spanish_description"
     t.string "dimensions"
     t.string "service_type"
     t.integer "user_id"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2024_09_21_031905) do
 
   create_table "tags", force: :cascade do |t|
     t.string "english_name"
-    t.string "nombre_espanol"
+    t.string "spanish_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

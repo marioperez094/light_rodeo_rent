@@ -3,10 +3,7 @@ import React, { ReactNode } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
-//Stylesheet
-import "./navbar.scss";
-
-export default function Navbar({ children } : { children: ReactNode}) {
+export function Navbar({ children } : { children: ReactNode}) {
   return(
     <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container-fluid">

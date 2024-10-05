@@ -1,8 +1,16 @@
 class StaticPagesController < ApplicationController
   def admin
-    render 'admin'
+    admin_check
   end
 
+  def admin_services
+    admin_check
+  end
+
+  def admin_categories
+    admin_check
+  end
+    
   def login
     render 'login'
   end

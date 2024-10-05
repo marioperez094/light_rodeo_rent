@@ -10,7 +10,7 @@ RSpec.describe Api::TagsController, type: :controller do
       @request.cookie_jar.signed['light_rodeo_session_token'] = session.token
       
       tag1 = FactoryBot.create(:tag)
-      tag2 = FactoryBot.create(:tag, english_name: 'Combo', nombre_espanol: 'Combo')
+      tag2 = FactoryBot.create(:tag, english_name: 'Combo', spanish_name: 'Combo')
 
       get :index
 
@@ -18,12 +18,12 @@ RSpec.describe Api::TagsController, type: :controller do
         tags: [{
           id: tag1.id,
           english_name: 'Themed',
-          nombre_espanol: 'Tematico'
+          spanish_name: 'Tematico'
         },
         {
           id: tag2.id,
           english_name: 'Combo',
-          nombre_espanol: 'Combo'
+          spanish_name: 'Combo'
         }]
       }.to_json)
     end
@@ -34,7 +34,7 @@ RSpec.describe Api::TagsController, type: :controller do
       @request.cookie_jar.signed['light_rodeo_session_token'] = session.token
       
       tag1 = FactoryBot.create(:tag)
-      tag2 = FactoryBot.create(:tag, english_name: 'Combo', nombre_espanol: 'Combo')
+      tag2 = FactoryBot.create(:tag, english_name: 'Combo', spanish_name: 'Combo')
 
       get :show, params: { id: tag2.id }
 
@@ -42,7 +42,7 @@ RSpec.describe Api::TagsController, type: :controller do
         tag: {
           id: tag2.id,
           english_name: 'Combo',
-          nombre_espanol: 'Combo'
+          spanish_name: 'Combo'
         }
       }.to_json)
     end
@@ -57,7 +57,7 @@ RSpec.describe Api::TagsController, type: :controller do
       post :create, params: {
         tag: {
           english_name: 'Themed',
-          nombre_espanol: 'Tematico'
+          spanish_name: 'Tematico'
         }
       }
 
@@ -67,7 +67,7 @@ RSpec.describe Api::TagsController, type: :controller do
         tag: {
           id: 1,
           english_name: 'Themed',
-          nombre_espanol: 'Tematico'
+          spanish_name: 'Tematico'
         }
       }.to_json)
     end
@@ -85,7 +85,7 @@ RSpec.describe Api::TagsController, type: :controller do
         tag: {
           id: tag.id,
           english_name: 'Combo',
-          nombre_espanol: 'Combo'
+          spanish_name: 'Combo'
         }
       }
 
@@ -93,7 +93,7 @@ RSpec.describe Api::TagsController, type: :controller do
         tag: {
           id: 1,
           english_name: 'Combo',
-          nombre_espanol: 'Combo'
+          spanish_name: 'Combo'
         }
       }.to_json)
     end
@@ -106,8 +106,8 @@ RSpec.describe Api::TagsController, type: :controller do
       @request.cookie_jar.signed['light_rodeo_session_token'] = session.token
 
       tag1 = FactoryBot.create(:tag)
-      tag2 = FactoryBot.create(:tag, english_name: 'Mechanical Bull', nombre_espanol: 'Toro Mecanico')
-      tag3 = FactoryBot.create(:tag, english_name: 'Obstacles', nombre_espanol: 'Obstaculos')
+      tag2 = FactoryBot.create(:tag, english_name: 'Mechanical Bull', spanish_name: 'Toro Mecanico')
+      tag3 = FactoryBot.create(:tag, english_name: 'Obstacles', spanish_name: 'Obstaculos')
 
       service1 = FactoryBot.create(:service, user: user)
       service2 = FactoryBot.create(:service, user: user)
@@ -123,11 +123,11 @@ RSpec.describe Api::TagsController, type: :controller do
         tags: [{
           id: tag1.id,
           english_name: tag1.english_name,
-          nombre_espanol: tag1.nombre_espanol
+          spanish_name: tag1.spanish_name
         }, {
           id: tag2.id,
           english_name: tag2.english_name,
-          nombre_espanol: tag2.nombre_espanol
+          spanish_name: tag2.spanish_name
         }]
       }.to_json)
     end

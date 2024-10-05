@@ -70,7 +70,7 @@ module Api
         end
 
         def tag_params
-            params.require(:tag).permit(:english_name, :nombre_espanol)
+            params.require(:tag).permit(:english_name, :spanish_name)
         end
     end
 end
