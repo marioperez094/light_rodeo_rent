@@ -7,7 +7,12 @@ class StaticPagesController < ApplicationController
     admin_check
   end
 
-  def admin_categories
+  def admin_service
+    admin_check
+    @data = { service_id: params[:id] }.to_json
+  end
+
+  def admin_tags
     admin_check
   end
     

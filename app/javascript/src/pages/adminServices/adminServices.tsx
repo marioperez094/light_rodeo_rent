@@ -18,8 +18,8 @@ class AdminServices extends React.Component<AppProps, AppStates> {
         <AdminNavbar />
         <main className="container-fluid">
             <Routes>
-              <Route exact path='/admin/services' element={ <ProductList /> } />
-              <Route path="/admin/services/new_service" element={ <NewService /> } />
+              <Route exact path='/admin/servicelist' element={ <ProductList /> } />
+              <Route path="/admin/servicelist/new_service" element={ <NewService /> } />
             </Routes>
         </main>
       </Router>

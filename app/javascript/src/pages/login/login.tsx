@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 //Functions
 import { handleErrors, safeCredentials } from "@utils/fetchHelper";
-import { LabeledTextInput } from "../../components/formComponents/formComponents";
+import { LabeledInput } from "@components/formComponents/formComponents";
 
 type AppProps = {};
 
@@ -59,13 +59,13 @@ class Login extends React.Component<AppProps, AppStates> {
           <h6 className="text-center">Ingresar</h6>
           <div className="col-12 col-md-9 col-lg-6 mx-auto my-4">
             <form onSubmit={ this.login }>
-              <LabeledTextInput
+              <LabeledInput
                 label="Nombre de usario"
                 name="username"
                 value={ username }
                 handleChange={ this.handleChange }
               />
-              <LabeledTextInput
+              <LabeledInput
                 label="Contraseña"
                 name="password"
                 type="password"

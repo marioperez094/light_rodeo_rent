@@ -50,7 +50,8 @@ export function safeCredentialsFormData(options = {}) {
 
 export function handleErrors(response) {
   if (!response.ok) {
-    throw Error(response.statusText);
+    return response.json()
+      .then(error => { throw Error(JSON.stringify(error.error)) })
   }
-  return response.json();
+    return response.json();
 }

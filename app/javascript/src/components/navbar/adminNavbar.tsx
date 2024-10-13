@@ -33,7 +33,7 @@ export default function AdminNavbar() {
         Light Rodeo's Rent
       </a>  
       <ExpandableMenu>
-        <NavItem link={ "/admin/services" } title={ "Servicios" } />
+        <NavItem link={ "/admin/servicelist" } title={ "Servicios" } />
         <NavItem link={ "/admin/tags" } title={ "Categorias" } />
         <li className="nav-item">
           <a

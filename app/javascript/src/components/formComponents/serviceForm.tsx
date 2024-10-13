@@ -2,41 +2,41 @@
 import React from "react"
 
 //Components
-import { LabeledTextInput, LabeledTextArea, LabeledSelector } from "@components/formComponents/formComponents";
+import { LabeledInput, LabeledTextArea, LabeledSelector } from "@components/formComponents/formComponents";
 
 //Functions
 import { services } from "@utils/services";
+import { SaveButton } from "./formComponents";
+
+//Types
+import { tagType, serviceType } from ".@utils/types";
 
 const spanishServices: string[] = Object.keys(services).map(service => services[service]["Espanol"])
 
 export default function ServiceForm(
   {
-    english_name,
-    spanish_name,
-    english_description,
-    spanish_description,
-    dimensions, 
-    service_type,
-    handleChange
+    service,
+    loading,
+    handleChange,
+    submitService,
   }: {
-    english_name: string;
-    spanish_name: string;
-    english_description: string;
-    spanish_description: string;
-    dimensions: string;
-    service_type: string;
-    handleChange: Function
+    service: serviceType
+    loading: boolean;
+    handleChange: Function;
+    submitService: Function;
   }
 ) {
+  
+  const { english_name, spanish_name, english_description, spanish_description, dimensions, service_type } = service;
   return(
-    <form className="col-12 col-md-10 col-xl-9">
-      <LabeledTextInput 
+    <form onSubmit={ submitService } className="col-12 col-md-10 col-xl-9">
+      <LabeledInput 
         label="Nombre de Servicio" 
         value={ english_name } 
         name={ "english_name" } 
         handleChange={ handleChange } 
       />
-      <LabeledTextInput 
+      <LabeledInput 
         label="Nombre de Servicio en Ingles" 
         value={ spanish_name } 
         name={ "spanish_name" } 
@@ -54,20 +54,33 @@ export default function ServiceForm(
         name={ "spanish_description" } 
         handleChange={ handleChange } 
       />
-      <LabeledTextInput 
+      <LabeledInput 
         label="Dimensiones" 
         value={ dimensions } 
         name={ "dimensions" } 
         handleChange={ handleChange } 
+        required={ false }
       />
-      <LabeledSelector 
-        label="Tipo de Servicio" 
-        options={ spanishServices }
-        value={ service_type } 
-        name={ "service_type" } 
-        handleChange={ handleChange } 
+
+      <div className="mb-3">
+        <label
+          htmlFor="images"
+          className="form-label"
+        >
+          Añadir imágenes
+        </label>
+        <input
+          className="form-control"
+          type="file"
+          id="images"
+          name="images"
+          accept="images/*"
+          multiple
+        />
+      </div>
+      <SaveButton
+        loading={ loading } 
       />
-      <button type="submit" className="btn btn-dark my-3 text-center">Guardar</button>
     </form>
   )
-}
+};

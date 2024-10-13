@@ -1,17 +1,19 @@
 //External Imports
 import React from "react";
 
-export function LabeledTextInput(
+export function LabeledInput(
   {
     label,
     type = "text",
     name, 
+    required = true,
     value,
     handleChange
   }: {
     label: string;
     type?: string;
     name: string;
+    required?: boolean;
     value: string;
     handleChange: Function;
   }
@@ -19,7 +21,7 @@ export function LabeledTextInput(
   return (
     <div className="mb-3">
       <label 
-        htmlFor={ label } 
+        htmlFor={ name }
         className="form-label"
       >
         { label }
@@ -27,11 +29,11 @@ export function LabeledTextInput(
       <input 
         type={ type } 
         className="form-control" 
-        id={ label } 
+        id={ name } 
         name={ name } 
         value={ value } 
         onChange={ handleChange } 
-        required 
+        required = { required }
       />
     </div>
   )
@@ -103,6 +105,20 @@ export function LabeledSelector({
       >
         { options.map((option, index) => <option value={ option } key={ index }>{ option }</option>)}
       </select>
+    </div>
+  )
+};
+
+export function SaveButton({ loading }: { loading: boolean }) {
+  return (
+    <div className="col-12 col-md-3">
+      <button 
+        type="submit" 
+        className="btn btn-dark my-3 text-center w-100"
+        disabled={ loading }
+      >
+        { loading ? "Guardando..." : "Guardar" }
+      </button>
     </div>
   )
 };

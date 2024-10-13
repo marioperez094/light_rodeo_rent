@@ -78,7 +78,7 @@ module Api
       end
   
       def service_params
-        params.require(:service).permit(:english_name, :spanish_name, :english_description, :spanish_description, :dimensions, :service_type)
+        params.require(:service).permit(:english_name, :spanish_name, :english_description, :spanish_description, :dimensions, images: [])
       end
     end
   end

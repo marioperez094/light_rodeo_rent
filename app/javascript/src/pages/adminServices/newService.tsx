@@ -8,15 +8,18 @@ import ServiceForm from "@components/formComponents/serviceForm";
 //Stylesheets
 import "./adminServices.scss"
 
+//Functions
+import { errorObject } from "@utils/utils"
+import { safeCredentialsFormData, safeCredentials, handleErrors } from "@utils/fetchHelper";
+import { tagType, serviceType } from "../../utils/types";
+
 type AppProps = {};
 
 type AppStates = {
-  english_name: string;
-  spanish_name: string;
-  english_description: string;
-  spanish_description: string;
-  dimensions: string;
-  service_type: string;
+  loading: boolean;
+  error: string;
+  service: serviceType;
+  services: tagType[];
 };
 
 class NewService extends React.Component<AppProps, AppStates> {
@@ -24,23 +27,63 @@ class NewService extends React.Component<AppProps, AppStates> {
     super(props);
 
     this.state = {
-      english_name: "",
-      spanish_name: "",
-      english_description: "",
-      spanish_description: "",
-      dimensions: "",
-      service_type: "Tacos"
+      loading: false,
+      error: "",
+      service: {
+        english_name: "",
+        spanish_name: "",
+        english_description: "",
+        spanish_description: "",
+        dimensions: "",
+      },
+      services: []
     }
-  }
+  };
 
   handleChange = (input: React.ChangeEvent<HTMLInputElement>, value: string): void => {
     this.setState({
-      ...this.state, [input.target.name]: String(input.target.value)
-    }, () => console.log(this.state));
+      service: {
+        ...this.state.service,
+        [input.target.name]: input.target.value
+      }
+    });
+  };
+
+  submitService = (submit) => {
+    if (submit) submit.preventDefault();
+    this.setState({ loading: true });
+    const fileInputElement = document.querySelector('#images');
+    const { english_name, spanish_name, english_description, spanish_description, dimensions } = this.state.service
+
+    let formData = new FormData();
+    for (let index = 0; index < fileInputElement.files.length; index++) {
+      formData.append('service[images][]', fileInputElement.files[index]);
+    };
+
+    formData.set('service[english_name]', english_name);
+    formData.set('service[spanish_name]', spanish_name);
+    formData.set('service[english_description]', english_description);
+    formData.set('service[spanish_description]', spanish_description);
+    formData.set('service[dimensions]', dimensions);
+
+    fetch("/api/services", safeCredentialsFormData({
+      method: "POST",
+      body: formData
+    }))
+      .then(handleErrors)
+      .then(data => {
+        if (data.service) return window.location.assign(`/admin/service/${data.service.id}`)
+      })
+      .catch(error => {
+        this.setState({
+          error: errorObject(error),
+          loading: false,
+        })
+      })
   };
 
   render() {
-    const { english_name, spanish_name, english_description, spanish_description, dimensions, service_type } = this.state;
+    const { loading, error, services, service } = this.state;
     
     return (
       <React.Fragment>
@@ -48,14 +91,12 @@ class NewService extends React.Component<AppProps, AppStates> {
         <main className="container-fluid" id="product-form">
           <div className="row">
             <ServiceForm 
-              english_name={ english_name }
-              spanish_name={ spanish_name }
-              english_description={ english_description }
-              spanish_description={ spanish_description }
-              dimensions= { dimensions }
-              service_type={ service_type }
+              loading={ loading }
+              service={ service }
               handleChange={ this.handleChange }
+              submitService={ this.submitService }
             />
+            <p className="text-danger">{ error }</p>
           </div>
         </main>
       </React.Fragment>

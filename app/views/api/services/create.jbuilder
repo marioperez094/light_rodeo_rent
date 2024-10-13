@@ -5,5 +5,16 @@ json.service do
   json.english_description  @service.english_description
   json.spanish_description  @service.spanish_description
   json.dimensions           @service.dimensions
-  json.service_type         @service.service_type
+  
+  json.tags do
+    json.array! @service.tags do |tag|
+      json.tag              tag
+    end
+  end
+
+  json.images do
+    json.array! @service.images do |image|
+      json.image_url        url_for(image)
+    end
+  end
 end
