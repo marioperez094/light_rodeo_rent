@@ -27,12 +27,12 @@ RSpec.describe Api::TaggablesController, type: :controller do
           service: {
             id: service.id,
             english_name: service.english_name,
-            nombre_espanol: service.nombre_espanol
+            spanish_name: service.spanish_name
           },
           tag: {
             id: tag.id,
             english_name: tag.english_name,
-            nombre_espanol: tag.nombre_espanol
+            spanish_name: tag.spanish_name
           }
         }
       }.to_json)

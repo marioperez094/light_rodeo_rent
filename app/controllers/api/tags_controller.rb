@@ -33,23 +33,17 @@ module Api
             status: :ok
         end
 
-        def update
+        def destroy
             if !current_session
-                return render json: { error: 'No esta registrado.' },
-                status: :unauthorized
+                return render json: { error: 'No esta registrado.' }, status: :unauthorized
             end
 
             @tag = search_tag
-            return render json: { error: 'No se encontrol el Tag' },
-            status: :not_found if !@tag
 
-            begin
-                @tag.update(tag_params)
-                render 'api/tags/create',
-                status: :ok
-            rescue ArgumentError => e
-                render json: { error: e.message },
-                status: :bad_request
+            if @tag&.destroy
+                render json: { success: true }
+            else
+                render json: { success: false }
             end
         end
 
@@ -62,6 +56,16 @@ module Api
             render 'api/tags/index', status: :ok
         end
 
+        def index_all_and_belongs
+            @service = Service.find_by(id: params[:id])
+            return render json: { error: 'No se encontro el servicio.'},
+            status: :not_found if !@service
+
+            @tags = Tag.order(created_at: :asc)
+            render 'api/tags/indexByService', 
+            status: :ok
+        end
+
         private
 
         def search_tag
@@ -70,7 +74,7 @@ module Api
         end
 
         def tag_params
-            params.require(:tag).permit(:english_name, :nombre_espanol)
+            params.require(:tag).permit(:english_name, :spanish_name, :inflatable)
         end
     end
 end

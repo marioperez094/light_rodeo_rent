@@ -10,7 +10,7 @@ RSpec.describe Tag, type: :model do
 
     it 'must have an spanish name' do
       expect {
-        FactoryBot.create(:tag, nombre_espanol: nil)
+        FactoryBot.create(:tag, spanish_name: nil)
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
@@ -22,7 +22,7 @@ RSpec.describe Tag, type: :model do
 
     it 'must have a spanish name with more than 3 characters' do
       expect {
-        FactoryBot.create(:tag, nombre_espanol: 'c' * 2)
+        FactoryBot.create(:tag, spanish_name: 'c' * 2)
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
@@ -34,7 +34,7 @@ RSpec.describe Tag, type: :model do
 
     it 'must have a spanish name with less than 16 characters' do
       expect {
-        FactoryBot.create(:tag, nombre_espanol: 'c' * 16)
+        FactoryBot.create(:tag, spanish_name: 'c' * 16)
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
@@ -48,10 +48,10 @@ RSpec.describe Tag, type: :model do
 
     
     it 'must have a unique spanish name' do
-      FactoryBot.create(:tag, nombre_espanol: 'unique')
+      FactoryBot.create(:tag, spanish_name: 'unique')
 
       expect {
-        FactoryBot.create(:tag, nombre_espanol: 'unique')
+        FactoryBot.create(:tag, spanish_name: 'unique')
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
   end

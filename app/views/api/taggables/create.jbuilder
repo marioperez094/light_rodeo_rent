@@ -6,12 +6,12 @@ json.taggable do
   json.service do
     json.id             @taggable.service.id
     json.english_name   @taggable.service.english_name
-    json.nombre_espanol @taggable.service.nombre_espanol
+    json.spanish_name @taggable.service.spanish_name
   end
 
   json.tag do
     json.id              @taggable.tag.id
     json.english_name    @taggable.tag.english_name
-    json.nombre_espanol  @taggable.tag.nombre_espanol
+    json.spanish_name  @taggable.tag.spanish_name
   end
 end

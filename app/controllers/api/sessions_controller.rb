@@ -3,6 +3,8 @@ module Api
       def create
         #Username to find user
         @user = User.find_by(username: params[:user][:username])
+
+        print(@user)
   
         if !@user && !(BCrypt::Password.new(@user.password) == params[:user][:password])
           return render json: {
