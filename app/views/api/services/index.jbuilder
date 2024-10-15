@@ -9,7 +9,10 @@ json.services do
 
     json.tags do
       json.array! service.tags do |tag|
-        json.tag              tag
+        if !tag.inflatable
+          json.english_name    tag.english_name
+          json.spanish_name    tag.spanish_name
+        end
       end
     end
 

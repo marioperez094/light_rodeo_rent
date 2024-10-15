@@ -5,25 +5,23 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 //Components
 import AdminNavbar from "@components/navbar/adminNavbar";
 import ServiceForm from "@components/formComponents/serviceForm";
+import Tag from "@components/tag/tag";
+
 
 //Functions
 import { handleErrors, safeCredentialsFormData, safeCredentials } from "@utils/fetchHelper";
-import { errorObject } from "@utils/utils"
 
 //Types
-import { serviceType } from "@utils/types";
+import { serviceType, tagType } from "@utils/types";
 
-//Stylesheets
-import "./adminService.scss";
-import { tagType } from "../../utils/types";
-import Tag from "../../components/tag/tag";
+//Stylesheet
+import "./adminService.scss"
 
 type AppProps = { service_id: number };
 
 type AppStates = {
-  service: serviceType,
-  loading: boolean,
-  error: string
+  service: serviceType;
+  loading: boolean;
 };
 
 class AdminService extends React.Component<AppProps, AppStates> {
@@ -31,8 +29,6 @@ class AdminService extends React.Component<AppProps, AppStates> {
     super(props);
 
     this.state = {
-      error: "",
-      loading: false,
       service: {
         english_name: "",
         spanish_name: "",
@@ -40,15 +36,16 @@ class AdminService extends React.Component<AppProps, AppStates> {
         spanish_description: "",
         dimensions: "",
         images: []
-      }
+      },
+      loading: false
     }
-  }
+  };
 
   componentDidMount(): void {
     fetch(`/api/services/${ this.props.service_id }`)
       .then(handleErrors)
       .then(data => {
-        this.setState({ service: data.service }, () => {console.log(this.state.service)})
+        this.setState({ service: data.service })
       })
       .catch(error => {
         console.log(error)
@@ -101,25 +98,23 @@ class AdminService extends React.Component<AppProps, AppStates> {
   };
 
   render() {
-    const { service, loading } = this.state
+    const { service, loading } = this.state;
     const { id, images, tags } = service;
 
-    return (
+    return(
       <Router>
         <AdminNavbar />
         <main className="container-fluid">
           <div className="row">
-            <div className="col-6 d-flex justify-content-center">
-              <Link 
-                className="mt-3 service-tab"
+            <div className="col-6 text-center mt-3">
+              <Link
                 to={ `/admin/service/${ id }` }
               >
                 Editar el Servicio
               </Link>
             </div>
-            <div className="col-6 d-flex justify-content-center">
+            <div className="col-6 text-center mt-3">
               <Link
-                className="mt-3 service-tab"
                 to={ `/admin/service/${ id }/taggables` }
               >
                 Editar las Categorias
@@ -138,25 +133,24 @@ class AdminService extends React.Component<AppProps, AppStates> {
                 />
               </>
             } />
-            <Route path={ `/admin/service/${ id }/taggables` } element={ 
-              <>
-                <TagSelector 
+            <Route path={ `/admin/service/${ id }/taggables` } element={
+                <TagSelector
                   id={ id }
-                  tags={ tags } 
+                  checkedTags={ tags }
                 />
-              </>
-            } />
+              } 
+            />
           </Routes>
         </main>
       </Router>
     )
+
   }
-};
+}
 
 export default AdminService;
 
 function ImageSlider({ images }: { images: [] }) {
-  console.log(images.length)
   if (images.length === 0) return <p className="text-center text-danger">Este servicio no tiene fotos</p>
 
   return (
@@ -172,33 +166,34 @@ function ImageSlider({ images }: { images: [] }) {
   )
 };
 
-function TagSelector({ 
-    id,
-    tags,
-  }: { 
-    id: number 
-    tags: tagType[]
+function TagSelector({
+  id, 
+  checkedTags
+}: {
+  id: number;
+  checkedTags: tagType[]
 }) {
   const [serviceTags, setServiceTags] = useState([]);
   const [inflatableTags, setInflatableTags] = useState([]);
 
   useEffect(() => {
     fetchTags();
-  }, [])
+  }, []);
 
   function fetchTags() {
-    fetch("/api/tags")
+    fetch(`/api/services/${ id }/tags`)
       .then(handleErrors)
       .then(data => {
         setServiceTags(data.tags.filter((tag) => { return(!tag.inflatable)}))
         setInflatableTags(data.tags.filter((tag) => { return(tag.inflatable)}))
-    })
-  }
+      })
+  };
 
   function changeCateogry(e) {
     if (!e.target.checked) {
-      return removeCategory(e)
+      return removeCategory(e);
     }
+    
     fetch("/api/taggables", safeCredentials({
       method: "POST",
       body: JSON.stringify({
@@ -207,19 +202,22 @@ function TagSelector({
       })
     }))
       .then(handleErrors)
-      .then(data => console.log(data))
+      .then(data => {
+        if (data.taggable) return fetchTags()
+      })
       .catch(error => console.log(error))
   };
 
   function removeCategory(e) {
-    fetch(`/api/taggables/${ e.target.value }`, safeCredentials({
+    fetch(`/api/taggables/${ e.target.value }/${ id }`, safeCredentials({
       method: "DELETE"
     }))
       .then(handleErrors)
       .then(data => {
-        console.log(data)
+        if (data.success) return fetchTags()
       })
-  }
+      .catch(error => console.log(error))
+  };
 
   return (
     <>
@@ -227,46 +225,41 @@ function TagSelector({
         <TagList
           tags={ serviceTags }
           changeCategory={ changeCateogry }
-          checkTags = { tags }
         />
       <h3 className="mt-3">Inflables</h3>
         <TagList
           tags={ inflatableTags }
           changeCategory={ changeCateogry }
-          checkTags= { tags }
         />
     </>
   )
 };
 
-function TagList({ 
-    tags,
-    changeCategory,
-    checkTags 
-  }: { 
-    tags: tagType[];
-    changeCategory: Function;
-    checkTags: tagType[];
+function TagList({
+  tags,
+  changeCategory,
+}: { 
+  tags: tagType[];
+  changeCategory: Function;
 }) {
-  if (tags.length === 0) return <p>No ahi categorias</p>
+if (tags.length === 0) return <p>No ahi categorias</p>
 
-  return (
-    <div className="row gy-3">
-      { tags.map((tag) => {
-        return (
-          <React.Fragment
-            key={ tag.id }
-          >
-            <Tag
-              tag={ tag }
-              disabled={ false }
-              changeCategory={ changeCategory }
-              data-checked-id={}
-              checked={ checkTags.filter(taggable => taggable.tag.id === tag.id).length > 0 }
-            />
-          </React.Fragment>
-        )
-      })}
-    </div>
-  )
+return (
+  <div className="row gy-3">
+    { tags.map((tag) => {
+      return (
+        <React.Fragment
+          key={ tag.id }
+        >
+          <Tag
+            tag={ tag }
+            disabled={ false }
+            changeCategory={ changeCategory }
+            checked={ tag.service[0] }
+          />
+        </React.Fragment>
+      )
+    })}
+  </div>
+)
 };

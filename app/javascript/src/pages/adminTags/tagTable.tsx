@@ -22,7 +22,6 @@ export default function TagTable({ disabled }: { disabled: boolean }) {
     fetch("/api/tags")
       .then(handleErrors)
       .then(data => { 
-        console.log(data)
         setServiceTags(data.tags.filter((tag) => { return(!tag.inflatable)}))
         setInflatableTags(data.tags.filter((tag) => { return(tag.inflatable)}))
       })

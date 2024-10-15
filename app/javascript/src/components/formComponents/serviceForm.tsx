@@ -32,26 +32,26 @@ export default function ServiceForm(
     <form onSubmit={ submitService } className="col-12 col-md-10 col-xl-9">
       <LabeledInput 
         label="Nombre de Servicio" 
-        value={ english_name } 
-        name={ "english_name" } 
-        handleChange={ handleChange } 
-      />
-      <LabeledInput 
-        label="Nombre de Servicio en Ingles" 
         value={ spanish_name } 
         name={ "spanish_name" } 
         handleChange={ handleChange } 
       />
+      <LabeledInput 
+        label="Nombre de Servicio en Ingles" 
+        value={ english_name } 
+        name={ "english_name" } 
+        handleChange={ handleChange } 
+      />
       <LabeledTextArea 
         label="Descripcion de Servicio" 
-        value={ english_description } 
-        name={ "english_description" } 
+        value={ spanish_description } 
+        name={ "spanish_description" } 
         handleChange={ handleChange } 
       />
       <LabeledTextArea 
         label="Descripcion de Servicio en Ingles" 
-        value={ spanish_description } 
-        name={ "spanish_description" } 
+        value={ english_description } 
+        name={ "english_description" } 
         handleChange={ handleChange } 
       />
       <LabeledInput 
