@@ -1,14 +1,12 @@
 //External Imports
 import React, { useEffect, useState } from "react";
 
-//Componets
-import Tag from "@components/tag/tag";
+//Components
+import TagList from "./tagList";
 
 //Functions
 import { handleErrors } from "@utils/fetchHelper";
 
-//Types
-import { tagType } from "@utils/types";
 
 export default function TagTable({ disabled }: { disabled: boolean }) {
   const [serviceTags, setServiceTags] = useState([]);
@@ -38,27 +36,5 @@ export default function TagTable({ disabled }: { disabled: boolean }) {
         tags={ inflatableTags }
       />
     </main>
-  )
-};
-
-
-function TagList({ tags }: { tags: tagType[] }) {
-  if (tags.length === 0) return <p>No ahi categorias</p>
-  
-  return(
-    <div className="row gy-3">
-      { tags.map((tag) => {
-        return (
-          <React.Fragment
-            key={ tag.id }
-          >
-            <Tag
-              disabled={ true }
-              tag={ tag }
-            />
-          </React.Fragment>
-        )
-      })}
-    </div>
   )
 };

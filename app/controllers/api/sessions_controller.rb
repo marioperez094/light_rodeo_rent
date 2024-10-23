@@ -1,14 +1,11 @@
 module Api
     class SessionsController < ApplicationController
       def create
-        #Username to find user
         @user = User.find_by(username: params[:user][:username])
-
-        print(@user)
   
         if !@user && !(BCrypt::Password.new(@user.password) == params[:user][:password])
           return render json: {
-            error: 'Invalid username or password.'
+            error: 'El nombre de usario o contraseña no se pudo encontrar.'
           }, status: :not_found
         end
           

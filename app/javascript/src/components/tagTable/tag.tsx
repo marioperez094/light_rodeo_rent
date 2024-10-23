@@ -25,9 +25,10 @@ export default function Tag(
     checked?: boolean;
   }
 ) {
+  const { id, spanish_name } = tag;
   
-  function deleteTag(tagID: number): void {
-    fetch(`/api/tags/${ tagID }`, safeCredentials({
+  function deleteTag(): void {
+    fetch(`/api/tags/${ id }`, safeCredentials({
       method: "DELETE"
     }))
       .then(handleErrors)
@@ -36,9 +37,7 @@ export default function Tag(
       })
   };
 
-  const { id, spanish_name } = tag;
   return (
-
     <div
       className="col-4 col-md-3 col-xl-2"
     >

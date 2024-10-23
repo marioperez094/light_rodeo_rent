@@ -3,7 +3,7 @@ class StaticPagesController < ApplicationController
     admin_check
   end
 
-  def admin_services
+  def admin_service_list
     admin_check
   end
 

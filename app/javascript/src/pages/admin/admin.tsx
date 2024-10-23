@@ -2,25 +2,23 @@
 import React from "react";
 
 //Components
-import AdminNavbar from "@components/navbar/adminNavbar";
+import AdminNavbar from "@components/adminNavbar/adminNavbar";
 import Calendar from "@components/calendar/calendar";
 
 //Stylesheets
 import "./admin.scss";
 
-type AppProps = {};
-
-type AppStates = {};
-
-class Admin extends React.Component<AppProps, AppStates> {
+class Admin extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <AdminNavbar />
+        <AdminNavbar 
+          current_page="admin"
+        />
         <Calendar />
       </React.Fragment>
     )
-  }
+  };
 };
 
 export default Admin;

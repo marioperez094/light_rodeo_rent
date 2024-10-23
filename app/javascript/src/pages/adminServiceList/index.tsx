@@ -1,10 +1,10 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import AdminServices from "./adminServices";
+import AdminServiceList from "./adminServiceList";
 
 document.addEventListener("DOMContentLoaded", () => {
   const node = document.createElement("div");
   const root = createRoot(node);
-  root.render(<AdminServices />);
+  root.render(<AdminServiceList />);
   document.body.appendChild(node);
 });

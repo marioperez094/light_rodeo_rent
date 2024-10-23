@@ -22,7 +22,8 @@ RSpec.describe Api::ServicesController, type: :controller do
           english_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
           spanish_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
           dimensions: '13.5x13.5',
-          service_type: 'Mechanical Bull'
+          tags: [],
+          images: []
         }, {
           id: service2.id,
           english_name: 'The Jacarandoso',
@@ -30,7 +31,8 @@ RSpec.describe Api::ServicesController, type: :controller do
           english_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
           spanish_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
           dimensions: '13.5x13.5',
-          service_type: 'Mechanical Bull'
+          tags: [],
+          images: []
         }]
     }.to_json)
     end
@@ -53,7 +55,8 @@ RSpec.describe Api::ServicesController, type: :controller do
           english_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
           spanish_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
           dimensions: '18.5x18.5',
-          service_type: 'Mechanical Bull'
+          tags: [],
+          images: []
         }
       }.to_json)
     end
@@ -72,7 +75,6 @@ RSpec.describe Api::ServicesController, type: :controller do
           english_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
           spanish_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
           dimensions: '13.5x13.5',
-          service_type: 'Mechanical Bull'
         }
       }
 
@@ -86,7 +88,8 @@ RSpec.describe Api::ServicesController, type: :controller do
           english_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
           spanish_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
           dimensions: '13.5x13.5', 
-          service_type: 'Mechanical Bull'
+          tags: [],
+          images: []
         }
       }.to_json)
     end
@@ -108,7 +111,6 @@ RSpec.describe Api::ServicesController, type: :controller do
           english_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
           spanish_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
           dimensions: '13.5x14.5',
-          service_type: 'Mechanical Bull'
         }
       }
 
@@ -120,7 +122,8 @@ RSpec.describe Api::ServicesController, type: :controller do
           english_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
           spanish_description: 'This is a description for the mechanical bull inflatable. This is a description for the mechanical bull inflatable.',
           dimensions: '13.5x14.5',
-          service_type: 'Mechanical Bull'
+          tags: [],
+          images: []
         }
       }.to_json)
     end
@@ -153,7 +156,8 @@ RSpec.describe Api::ServicesController, type: :controller do
           english_description: service1.english_description,
           spanish_description: service1.spanish_description,
           dimensions: service1.dimensions,
-          service_type: service1.service_type
+          tags: [],
+          images: []
         },{          
           id: service3.id,
           english_name: service3.english_name,
@@ -161,9 +165,26 @@ RSpec.describe Api::ServicesController, type: :controller do
           english_description: service3.english_description,
           spanish_description: service3.spanish_description,
           dimensions: service3.dimensions,
-          service_type: service3.service_type
+          tags: [],
+          images: []
         }]
       }.to_json)
+    end
+  end
+
+  context 'DELETE /services/:id' do
+    it 'deletes a service' do
+      user = FactoryBot.create(:user)
+      session = user.sessions.create
+      @request.cookie_jar.signed['light_rodeo_session_token'] = session.token
+
+      service = FactoryBot.create(:service, user: user)
+
+      expect(Service.count).to eq(1)
+
+      delete :destroy, params: { id: service.id }
+
+      expect(Service.count).to eq(0)
     end
   end
 end

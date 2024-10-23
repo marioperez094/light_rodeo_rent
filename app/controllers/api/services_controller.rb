@@ -2,7 +2,8 @@ module Api
     class ServicesController < ApplicationController
       def create 
         if !current_session
-          return render json: { error: 'No esta registrado' }, status: :unauthorized
+          return render json: { error: 'No esta registrado' }, 
+          status: :unauthorized
         end
   
         user = current_session.user
@@ -11,44 +12,54 @@ module Api
         @service.user = user
   
         if @service.save
-          render 'api/services/create', status: :created
+          render 'api/services/create', 
+          status: :created
   
         else
-          render json: { error: @service.errors }, status: :bad_request
+          render json: { error: @service.errors }, 
+          status: :bad_request
         end
       end
   
       def index
         @services = Service.order(created_at: :asc)
-        render 'api/services/index', status: :ok
+        render 'api/services/index', 
+        status: :ok
       end
   
       def show
         @service = search_service
-        return render json: { error: 'Service not found.' }, status: :not_found if !@service 
+        return render json: { error: 'Service not found.' }, 
+        status: :not_found if !@service 
   
-        render 'api/services/create', status: :ok
+        render 'api/services/create', 
+        status: :ok
       end
   
       def update
         if !current_session
-          return render json: { error: 'No esta registrado.' }, status: :unauthorized
+          return render json: { error: 'No esta registrado.' }, 
+          status: :unauthorized
         end
   
         @service = search_service
-        return render json: { error: 'Service not found.' }, status: :not_found if !@service 
+        return render json: { error: 'No se encontro el servicio.' }, 
+        status: :not_found if !@service 
   
         begin 
           @service.update(service_params)
-          render 'api/services/create', status: :ok
+          render 'api/services/create', 
+          status: :ok
         rescue ArgumentError => e
-          render json: { error: e.message }, status: :bad_request
+          render json: { error: e.message }, 
+          status: :bad_request
         end
       end
   
       def destroy
         if !current_session
-          return render json: { error: 'No esta registrado.' }, status: :unauthorized
+          return render json: { error: 'No esta registrado.' }, 
+          status: :unauthorized
         end
   
         @service = search_service
@@ -67,7 +78,8 @@ module Api
 
 
         @services = tag.services.order(created: :asc)
-        render 'api/services/index', status: :ok
+        render 'api/services/index', 
+        status: :ok
       end
   
       private

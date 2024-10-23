@@ -6,6 +6,5 @@ class Tag < ApplicationRecord
   validates :spanish_name, presence: true, length: { minimum: 3, maximum: 30 }
 
   validates_uniqueness_of :english_name
-  validates_uniqueness_of :spanish_name
-  
+  validates_uniqueness_of :spanish_name 
 end

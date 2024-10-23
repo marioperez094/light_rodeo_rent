@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LightRodeoRent</title>
+    <% if content_for? :head %>
+      <%= yield :head %>
+    <% else %>
+      <title><%="Light Rodeo's Rent | Family Owned Party Rentals"%></title>
+      <meta name="description" content="Rentals for any occasion!" />
+    <% end %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,7 +16,7 @@
     <%= stylesheet_packs_with_chunks_tag 'application' %>
   </head>
 
-  <body>
+  <body id='<%= action_name %>'>
     <%= yield %>
   </body>
 </html>

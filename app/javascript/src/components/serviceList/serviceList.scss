@@ -1,0 +1,17 @@
+@import "@stylesheets/variables.scss";
+
+#admin_service_list {
+  @media (max-width: 768px) {
+    #new-service-button {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      border-radius: 100px;
+    }
+  }
+
+  tbody tr {
+    cursor: pointer
+  }
+}
+

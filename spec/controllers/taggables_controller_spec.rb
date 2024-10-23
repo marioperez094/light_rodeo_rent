@@ -51,7 +51,7 @@ RSpec.describe Api::TaggablesController, type: :controller do
 
       expect(Taggable.count).to eq(1)
 
-      delete :destroy, params: { id: taggable.id }
+      delete :destroy, params: { service_id: service.id, tag_id: tag.id }
 
       expect(Taggable.count).to eq(0)
     end

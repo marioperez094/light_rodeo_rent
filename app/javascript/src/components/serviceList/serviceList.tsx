@@ -3,32 +3,36 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 //Components
-import PageHeader from "@components/pageHeader/pageHeader";
-import ProductTable from "@components/productTable/productTable";
-import { LabeledInput } from "@components/formComponents/formComponents";
+import PageHeader from "@components/headers/pageHeader";
+import { SubmitForm, InputButton } from "@components/formComponents/form";
+import ProductTable from "./productTable";
 
 //Functions
 import { handleErrors } from "@utils/fetchHelper";
 
-export default function ProductList() {
-  const [services, setServices] = useState([]);
+//Stylesheets
+import "./serviceList.scss";
+
+export default function ServiceList() {
+  const [services, setServices] = useState([])
   const [search, setSearch] = useState("");
   const [searchList, setSearchList] = useState([]);
 
   useEffect(() => {
-    fetchServices()
+    fetchService();
   }, []);
 
-  function fetchServices() {
+  function fetchService() {
     fetch("/api/services")
       .then(handleErrors)
       .then(data => {
-        setServices(data.services)
-        setSearchList(data.services)
+        setServices(data.services);
+        setSearchList(data.services);
       })
   };
 
   function sortByService() {
+    console.log(services)
     let serviceList = services.slice(0);
     serviceList = serviceList.sort((a, b) => { return a.spanish_name < b.spanish_name ? -1 : 1 })
     setSearchList(serviceList);
@@ -57,40 +61,39 @@ export default function ProductList() {
     setSearchList(serviceList);
   };
 
-  return(
-    <React.Fragment>
-      <header className="d-flex justify-content-between align-items-center">
+  return (
+    <>
+      <header>
         <PageHeader>Servicios</PageHeader>
-        <Link
-          className="btn btn-dark m-3"
-          to={ '/admin/servicelist/new_service' }
-        >
-          Agregar Servicio
-        </Link>
+
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-12 col-md-8 offset-md-2">
+              <SubmitForm onSubmit={ console.log("hi") }>
+                <InputButton 
+                  value={ search }
+                  label="Buscar"
+                  handleChange={ (e) => setSearch(e.target.value) }
+                />
+              </SubmitForm>
+            </div>
+            <div className="col-2 d-flex align-items-start justify-content-end">
+              <Link
+                id="new-service-button"
+                className="btn btn-dark"
+                to={ "/admin/service-list/new-service" }
+              >
+                Agregar Servicio
+              </Link>
+            </div>
+          </div>
+        </div>
       </header>
-      <div className="input-group mb-3">
-        <input 
-          type="text" 
-          className="form-control" 
-          value={ search } 
-          onChange={ (e) => setSearch(e.target.value) }
-          aria-label="Search bar" 
-          aria-describedby="button-addon2" 
-        />
-        <button 
-          className="btn btn-outline-secondary" 
-          type="button" 
-          id="button-addon2"
-          onClick={ () => searchByService() }
-        >
-          Buscar
-          </button>
-      </div>
-      <ProductTable 
-        services={ searchList }
+      <ProductTable
+        services={ searchList } 
         sortByService={ sortByService }
         sortByTag={ sortByTag }
       />
-    </React.Fragment>
+    </>
   )
 };

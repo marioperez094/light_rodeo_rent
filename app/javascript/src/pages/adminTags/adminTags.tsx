@@ -2,11 +2,10 @@
 import React from "react";
 
 //Components
-import AdminNavbar from "@components/navbar/adminNavbar";
-import { LabeledInput } from "@components/formComponents/formComponents";
-import { SaveButton } from "@components/formComponents/formComponents";
-import PageHeader from "@components/pageHeader/pageHeader";
-import TagTable from "./tagTable";
+import AdminNavbar from "@components/adminNavbar/adminNavbar";
+import PageHeader from "@components/headers/pageHeader";
+import TagTable from "@components/tagTable/tagTable";
+import { LabeledInput, SaveButton } from "@components/formComponents/form";
 
 //Functions
 import { errorObject } from "@utils/utils"
@@ -110,9 +109,11 @@ class AdminTags extends React.Component<AppProps, AppStates> {
                   </div>
               </div>
             </div>
-            <SaveButton 
-              loading={ loading }
-            />
+            <div className="col-12 col-md-3 offset-md-9">
+              <SaveButton 
+                loading={ loading }
+              />
+            </div>
           </form>
           <p className="text-danger">{ error }</p>
         </div>

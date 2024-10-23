@@ -8,19 +8,23 @@ module Api
       end
 
       service = Service.find_by(id: params[:taggable][:service_id])
-      return render json: { error: 'No se encontro el servicio.' }, status: :not_found if !service
+      return render json: { error: 'No se encontro el servicio.' }, 
+      status: :not_found if !service
 
       tag = Tag.find_by(id: params[:taggable][:tag_id])
-      return render json: { error: 'No se encontro el tag.' }, status: :not_found if !tag
+      return render json: { error: 'No se encontro el tag.' }, 
+      status: :not_found if !tag
 
       @taggable = Taggable.new(taggable_params)
       @taggable.service = service
       @taggable.tag = tag
       
       if @taggable.save
-        render 'api/taggables/create', status: :created
+        render 'api/taggables/create', 
+        status: :created
       else ArgumentError => e
-        render json: { error: @taggable.errors }, status: :bad_request
+        render json: { error: @taggable.errors }, 
+        status: :bad_request
       end
     end
 
@@ -30,18 +34,13 @@ module Api
       status: :ok
     end
 
-    def find_by_service_tag
-      @taggable = Taggable.find_by(service_id: params[:service_id], tag_id: params[:tag_id])
-      render "api/taggables/create",
-      status: :ok
-    end
-
     def destroy
       if !current_session
         return render json: { error: 'No esta registrado.' },
         status: :unauthorized
       end
 
+      #Searching for taggable based on Service and Tag ID provided by the front end
       @taggable = Taggable.find_by(service_id: params[:service_id], tag_id: params[:tag_id])
 
       if @taggable&.destroy

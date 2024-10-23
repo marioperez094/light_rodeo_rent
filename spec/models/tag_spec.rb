@@ -26,15 +26,15 @@ RSpec.describe Tag, type: :model do
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
-    it 'must have an english name with less than 16 characters' do
+    it 'must have an english name with less than 31 characters' do
       expect {
-        FactoryBot.create(:tag, english_name: 'c' * 16)
+        FactoryBot.create(:tag, english_name: 'c' * 31)
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
-    it 'must have a spanish name with less than 16 characters' do
+    it 'must have a spanish name with less than 31 characters' do
       expect {
-        FactoryBot.create(:tag, spanish_name: 'c' * 16)
+        FactoryBot.create(:tag, spanish_name: 'c' * 31)
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
