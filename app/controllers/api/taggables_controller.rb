@@ -1,6 +1,5 @@
 module Api
   class TaggablesController < ApplicationController
-    
     def create
       if !current_session
         return render json: { error: 'No esta registrado.' }, 
@@ -22,7 +21,7 @@ module Api
       if @taggable.save
         render 'api/taggables/create', 
         status: :created
-      else ArgumentError => e
+      else
         render json: { error: @taggable.errors }, 
         status: :bad_request
       end
@@ -30,7 +29,7 @@ module Api
 
     def index
       @taggables = Taggable.order(created_at: :asc)
-      render "api/taggables/index",
+      render 'api/taggables/index',
       status: :ok
     end
 

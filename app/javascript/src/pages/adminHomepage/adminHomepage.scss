@@ -1,0 +1,51 @@
+#admin_homepage {
+  .admin-carousel-border {
+    border: 10px white solid;
+  }
+
+  .col-md-4 {
+    .inner-shadow {
+      height: 300px;
+    }
+  }
+
+  .col-md-2 {
+    margin-top: 20px;
+    .inner-shadow {
+      height: 200px;
+    }
+  }
+
+  .cards-container {
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+
+  .homepage-plus {
+    height: 50px;
+    color: rgba(50, 50, 53, 0.2);
+    transition: ease-in-out, 0.5s;
+    &:hover,
+    &:focus-visible {
+      scale: 2;
+      color: rgba(46, 46, 49, 0.2);
+    }
+  }
+
+  .service-images {
+    height: 400px;
+    overflow-y: scroll;
+    .service-image {
+      min-height: 300px;
+    }
+  }
+
+  .service-image {
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+}

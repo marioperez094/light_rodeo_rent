@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_10_09_094548) do
+ActiveRecord::Schema.define(version: 2024_10_24_032828) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(version: 2024_10_09_094548) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "cards", force: :cascade do |t|
+    t.string "image_url"
+    t.boolean "isCarousel"
+    t.integer "tag_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tag_id"], name: "index_cards_on_tag_id"
   end
 
   create_table "service_types", force: :cascade do |t|
@@ -95,6 +104,7 @@ ActiveRecord::Schema.define(version: 2024_10_09_094548) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cards", "tags"
   add_foreign_key "services", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "taggables", "services"

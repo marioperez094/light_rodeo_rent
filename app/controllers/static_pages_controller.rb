@@ -15,6 +15,10 @@ class StaticPagesController < ApplicationController
   def admin_tags
     admin_check
   end
+
+  def admin_homepage
+    admin_check
+  end
     
   def login
     render 'login'
