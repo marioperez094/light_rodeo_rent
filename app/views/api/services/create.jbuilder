@@ -6,9 +6,11 @@ json.service do
   json.spanish_description  @service.spanish_description
   json.dimensions           @service.dimensions
   
-  json.tags do
-    json.array! @service.tags do |tag|
-      json.tag              tag
+  if @service.tags
+    json.tags do
+      json.array! @service.tags do |tag|
+        json.tag              tag
+      end
     end
   end
 

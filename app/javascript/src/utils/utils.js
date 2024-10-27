@@ -30,3 +30,23 @@ export function setServiceFormData(fileInputElement, service)  {
 
   return formData;
 };
+
+export function sortByServices(services) {
+  let serviceList = services.slice(0);
+  serviceList = serviceList.sort((a, b) => { return a.spanish_name < b.spanish_name ? -1 : 1 });
+  return serviceList
+};
+
+export function sortByTags(services) {
+  let serviceList = services.slice(0)
+  serviceList = serviceList.sort((a, b) => {
+    if (a.tags[0] === undefined) {
+      return -1
+    } 
+    else if (b.tags[0] === undefined) {
+      return 1
+    }
+    return a.tags[0].spanish_name < b.tags[0].spanish_name ? -1 : 1
+  })
+  return serviceList
+};

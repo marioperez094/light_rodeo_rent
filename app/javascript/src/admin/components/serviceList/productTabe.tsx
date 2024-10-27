@@ -1,34 +1,35 @@
 //External Imports
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
 //Components
-import NoListings from "@components/headers/noListings";
 import ProductBody from "./productBody";
+import NoListings from "@components/headers/noListings";
+
+//Functions
+import { sortByServices, sortByTags } from "@utils/utils";
 
 //Types
 import { serviceType } from "@utils/types";
 
-export default function ProductTable({
+export default function ProductTable({ 
   services,
-  sortByService,
-  sortByTag
-  } : {
+  setServices
+}: { 
   services: serviceType[];
-  sortByService: Function;
-  sortByTag: Function;  
+  setServices: Dispatch<SetStateAction<serviceType>>;
 }) {
 
-  if (services.length === 0) return (<NoListings listing="servicios" />);
-  
+  if (services.length === 0) return <NoListings listing="de servicios" />;
+
   return(
     <table className="table table-hover">
       <thead>
         <tr>
           <th 
             scope="col"
-            onClick={ () => sortByService() }
+            onClick={ () => setServices(sortByServices(services)) }
           >
             Nombre
             <FontAwesomeIcon
@@ -40,7 +41,7 @@ export default function ProductTable({
           <th scope="col">Dimensiones</th>
           <th 
             scope="col"
-            onClick={ () => sortByTag() }
+            onClick={ () => setServices(sortByTags(services)) }
           >
             Tipo de Servicio
             <FontAwesomeIcon

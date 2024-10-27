@@ -9,6 +9,7 @@ const customConfig = {
             '@adminPages': path.resolve(__dirname, '..', '..', 'app/javascript/src/admin/pages'),
             '@utils': path.resolve(__dirname, '..', '..', 'app/javascript/src/utils'),
             '@context': path.resolve(__dirname, '..', '..', 'app/javascript/src/context'),
+            '@components': path.resolve(__dirname, '..', '..', 'app/javascript/src/components'),
             '@adminComponents': path.resolve(__dirname, '..', '..', 'app/javascript/src/admin/components'),
             '@stylesheets': path.resolve(__dirname, '..', '..', 'app/javascript/stylesheets'),
             '@images': path.resolve(__dirname, '..', '..', 'app/assets/images')

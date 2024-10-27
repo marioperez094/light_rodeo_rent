@@ -3,7 +3,7 @@ module Api
       def create
         @user = User.find_by(username: params[:user][:username])
   
-        if !@user && !(BCrypt::Password.new(@user.password) == params[:user][:password])
+        if !@user || !(BCrypt::Password.new(@user.password) == params[:user][:password])
           return render json: {
             error: 'El nombre de usario o contraseña no se pudo encontrar.'
           }, status: :not_found

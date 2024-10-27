@@ -6,7 +6,7 @@
 import Rails from "@rails/ujs"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
-import "../stylesheets/application.scss"
+import "@stylesheets/application.scss"
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 Rails.start()
