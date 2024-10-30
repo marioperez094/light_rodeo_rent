@@ -1,16 +1,16 @@
 //External Imports 
-import React, { ChangeEvent, ChangeEventHandler, FormEvent } from "react";
+import React from "react";
 
 //Components
 import AdminNavbar from "@adminComponents/adminNavbar/adminNavbar";
 import PageHeader from "@components/headers/pageHeader";
-import { SubmitForm, LabeledInput, LoadingButton, WordCount } from "@components/formComponents/formComponents";
+import TagForm from "@adminComponents/tagComponents/tagForm";
+import TagTable from "@adminComponents/tagComponents/tagTable";
 
 //Functions
-import { safeCredentials, handleErrors } from "@utils/fetchHelper";
-import { errorObject } from "@utils/utils";
+import { handleErrors } from "@utils/fetchHelper";
 
-//Types
+//Utils
 import { tagType } from "@utils/types";
 
 //Stylesheets
@@ -18,126 +18,46 @@ import "./adminTags.scss";
 
 type AppProps = {};
 
-type AppStates = {
-  loading: boolean;
-  tag: tagType;
-}
+type AppState = {
+  tags: tagType[];
+};
 
-class AdminTags extends React.Component<AppProps, AppStates> {
+
+class AdminTags extends React.Component<AppProps, AppState> {
   constructor(props: any) {
     super(props);
 
     this.state = {
-      loading: false,
-      tag: {
-        spanish_name: "",
-        english_name: "",
-        inflatable: false,
-      }
+      tags: [],
     }
   };
 
-  handleChange = (e: ChangeEvent<HTMLInputElement>, value: string): void => {
-    this.setState({
-      tag: {
-        ...this.state.tag,
-        [e.target.name]: e.target.value
-      }
-    })
+  componentDidMount(): void {
+    this.fetchTags();
   };
 
-  handleCheckbox = (e: ChangeEventHandler<HTMLInputElement>, value: boolean): void => {
-    this.setState({
-      tag: {
-        ...this.state.tag,
-        inflatable: !this.state.tag.inflatable
-      }
-    })
-  };
-
-  submitTag = (e: FormEvent<HTMLFormElement>, value: void): void => {
-    e.preventDefault();
-    this.setState({ loading: true});
-
-    const{ tag } = this.state;
-    fetch("/api/tags", safeCredentials({
-      method: "POST",
-      body: JSON.stringify({ tag })
-    }))
+  fetchTags = () => {
+    fetch("/api/tags")
       .then(handleErrors)
-      .then(data => data.tag && window.location.reload())
-      .catch(error => {
-        alert("Error: " + errorObject(error));
-        this.setState({ loading: false })
-      })
+      .then(data => this.setState({ tags: data.tags }))
+      .catch(error => alert(error));
   }
 
   render() {
-    const { loading, tag } = this.state;
-    const { spanish_name, english_name, inflatable } = tag;
     return(
       <React.Fragment>
         <AdminNavbar />
         <header>
           <PageHeader>Categorias</PageHeader>
         </header>
-        <div className="container-fluid">
-          <SubmitForm onSubmit={ this.submitTag }>
-            <div className="col-12 col-md-6">
-              <LabeledInput
-                label="Categoria"
-                name="spanish_name"
-                value={ spanish_name }
-                handleChange={ this.handleChange }
-              >
-                <WordCount
-                  minCharacters={ 3 }
-                  maxCharacters={ 10 }
-                  message={ spanish_name }
-                />
-              </LabeledInput>
-            </div>
-            <div className="col-12 col-md-6">
-              <LabeledInput
-                label="Categoria en Ingles"
-                name="english_name"
-                value={ english_name }
-                handleChange={ this.handleChange }
-              >
-                <WordCount
-                  minCharacters={ 3 }
-                  maxCharacters={ 10 }
-                  message={ english_name }
-                />
-              </LabeledInput>
-            </div>
-            <div className="col-12">
-              <div className="row">
-                <div className="col-1 d-flex align-items-center justify-content-center">
-                  <input
-                    className="tag-checkbox"
-                    id="inflatable-category"
-                    type="checkbox"
-                    value={ inflatable }
-                    onChange={ this.handleCheckbox }
-                  />
-                </div>
-                <label 
-                  className="col-11 d-flex align-items-center justify-content-start"
-                  htmlFor="inflatable-category"
-                >
-                  Es categoria de inflable?
-                </label>
-              </div>
-            </div>
-            <div className="col-12 col-md-3 offset-md-9">
-              <LoadingButton
-                loading={ loading }
-                text="Guarda"
-              />
-            </div>
-          </SubmitForm>
-        </div>
+        <main className="container-fluid">
+          <TagForm fetchTags={ this.fetchTags } />
+        </main>
+        <section className="container-fluid">
+          <TagTable
+            tags={ this.state.tags }
+          />
+        </section>
       </React.Fragment>
     )
   };

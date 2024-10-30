@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 //Components
 import AdminNavbar from "@adminComponents/adminNavbar/adminNavbar";
-import AdminCardsFormat from "@adminComponents/adminCards/adminCards";
+import AdminCardsFilter from "@adminComponents/adminCards/adminCards";
+import AdminCardParams from "@adminComponents/adminCards/adminCardForm";
 
 //Functions
 import { handleErrors } from "@utils/fetchHelper";
@@ -18,8 +19,7 @@ import "./adminHomepage.scss";
 type AppProps = {};
 
 type AppStates = {
-  carouselCards: cardType;
-  serviceListCards: cardType[];
+  cards: cardType[];
 };
 
 class AdminHomepage extends React.Component<AppProps, AppStates> {
@@ -27,45 +27,46 @@ class AdminHomepage extends React.Component<AppProps, AppStates> {
     super(props);
 
     this.state = {
-      carouselCards: [],
-      serviceListCards: [],
+      cards: []
     }
   };
-  
+
   componentDidMount(): void {
+    this.fetchCards();
+  };
+
+  fetchCards = () => {
     fetch("/api/cards")
       .then(handleErrors)
-      .then(data => this.setCards(data.cards))
+      .then(data => this.setState({ cards: data.cards }))
       .catch(error => alert(error))
-  }
-
-  setCards = (cards: cardType): void => {
-    const carouselCards = cards.filter(card => card.isCarousel);
-    const serviceListCards = cards.filter(card => !card.isCarousel);
-
-    this.setState({ carouselCards, serviceListCards })
   };
 
   render() {
-    const { carouselCards, serviceListCards } = this.state;
-
+    const { cards } = this.state;
     return(
       <Router>
         <AdminNavbar />
         <Routes>
           <Route
-            exact path={"/admin/homepage"}
+            exact path="/admin/homepage"
             element={
-              <AdminCardsFormat
-                carouselCards={ carouselCards }
-                serviceListCards={ serviceListCards } 
+              <AdminCardsFilter
+                cards={ cards }
+              />
+            }
+          />
+          <Route
+            path="/admin/homepage/:cardType/:card_id"
+            element={
+              <AdminCardParams
               />
             }
           />
         </Routes>
       </Router>
     )
-  };
+  }
 };
 
 export default AdminHomepage;

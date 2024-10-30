@@ -29,14 +29,14 @@ class AdminServiceList extends React.Component<AppProps, AppState> {
   };
 
   componentDidMount(): void {
-    this.fetchService()
+    this.fetchServices()
   }
 
-  fetchService = () => {
+  fetchServices = () => {
     fetch("/api/services")
       .then(handleErrors)
       .then(data => this.setState({ services: data.services }))
-      .catch(error => alert(error))
+      .catch(error => alert(error));
   };
 
   render() {

@@ -3,7 +3,6 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 
 //Components
 import ImageSlider from "./imageSlider";
-import NoListings from "@components/headers/noListings";
 import ServiceForm from "@adminComponents/serviceForm/serviceForm";
 
 //Functions
@@ -58,9 +57,8 @@ export default function ServiceEditor({
       })
   };
 
-  if (!service) return <NoListings listing="de el Servicio"/>;
-
   const { images } = service;
+
   return(
     <>
       <ImageSlider images={ images } />

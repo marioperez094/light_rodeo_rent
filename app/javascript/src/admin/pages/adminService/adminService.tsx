@@ -5,7 +5,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //Components
 import AdminNavbar from "@adminComponents/adminNavbar/adminNavbar";
 import ActiveTab from "@adminComponents/serviceComponents/activeTab";
+import DeleteService from "@adminComponents/serviceComponents/deleteService";
 import ServiceEditor from "@adminComponents/serviceComponents/serviceEditor";
+import NoListings from "@components/headers/noListings";
 
 //Functions
 import { handleErrors } from "@utils/fetchHelper";
@@ -15,6 +17,7 @@ import { serviceType } from "@utils/types";
 
 //Stylesheets
 import "./adminService.scss";
+import TagTable from "@adminComponents/tagComponents/tagTable";
 
 
 type AppProps = { service_id: number };
@@ -59,6 +62,15 @@ class AdminService extends React.Component<AppProps, AppStates> {
   render() {
     const { service, loading } = this.state;
     const { id } = service;
+    
+    if (!service.id) {
+      return (
+        <>
+          <AdminNavbar />
+          <NoListings listing="de el Servicio"/>;
+        </>
+      )
+    }
 
     return(
       <Router>
@@ -98,6 +110,19 @@ class AdminService extends React.Component<AppProps, AppStates> {
                 />
               }
             />
+            <Route
+              path={ `/admin/service/${ id }/taggables` }
+              element={
+                <TagTable
+                />
+              }
+            />
+            <Route
+              path={ `/admin/service/${ id }/delete` }
+              element={
+                <DeleteService id={ id } />
+              } 
+            />
           </Routes>
         </main>
       </Router>
@@ -106,3 +131,22 @@ class AdminService extends React.Component<AppProps, AppStates> {
 };
 
 export default AdminService;
+
+class ServiceTags extends React.Component {
+  componentDidMount(): void {
+    this.fetchTags();
+  };
+
+  fetchTags = () => {
+    fetch("/api/tags")
+      .then(handleErrors)
+      .then(data => this.setState({ tags: data.tags }))
+      .catch(error => alert(error));
+  }
+
+  render() {
+    return(
+
+    )
+  }
+};

@@ -48,9 +48,7 @@ class Login extends React.Component<AppProps, AppStates> {
       })
     }))
       .then(handleErrors)
-      .then((data) => {
-        if (data.success) return location.assign("/admin")
-      })
+      .then(data => data.success && location.assign("/admin"))
       .catch((error) => { 
         alert(error)
         this.setState({ loading: false }) 

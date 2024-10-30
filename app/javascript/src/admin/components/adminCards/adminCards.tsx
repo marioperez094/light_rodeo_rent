@@ -7,16 +7,13 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { cardType } from "@utils/types";
 import { Link } from "react-router-dom";
 
-export default function AdminCardsFormat({ 
-  carouselCards,
-  serviceListCards,
-} : { 
-  carouselCards: cardType[];
-  serviceListCards: cardType[];
-}) {
+export default function AdminCardsFilter({ cards } : { cards: cardType[] }) {
+  const carouselCards = cards.filter(card => card.isCarousel);
+  const serviceListCards = cards.filter(card => !card.isCarousel);
+  
   return(
     <main className="container-fluid cards-container">
-      <AdminCardCounter 
+      <AdminCardCounter
         cards={ carouselCards }
         maxCards={ 3 }
       />
@@ -53,7 +50,7 @@ function AdminCardCounter({
           <React.Fragment key={ card }>
             <AdminCard
               card={ cards[card] }
-              id={ card }
+              count={ card }
               maxCards={ maxCards } 
             />
           </React.Fragment>
@@ -65,17 +62,21 @@ function AdminCardCounter({
 
 function AdminCard({ 
   card,
-  id,
+  count,
   maxCards
 } : { 
   card: cardType;
-  id: number;
+  count: number;
   maxCards: number;
 }) {
   const cardType = maxCards === 3 ? "Carrusel" : "Categoria";
-  let title =  `${ cardType } ${ id + 1 }`
+  let id = 0;
+  let title =  `${ cardType } ${ count + 1 }`
 
-  if (card && !card.isCarousel) title = card.tag.spanish_name;
+  if (card) {
+    id = card.id
+    title = card.tag ? card.tag.spanish_name : `Carrusel ${ count + 1 }`
+  };
 
   return(
     <Link

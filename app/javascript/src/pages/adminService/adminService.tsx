@@ -1,5 +1,5 @@
 //External Imports
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 //Components
@@ -51,7 +51,7 @@ class AdminService extends React.Component<AppProps, AppStates> {
         this.setState({ service: data.service })
       })
       .catch(error => {
-        console.log(error)
+        alert(error);
       })
   };
 
