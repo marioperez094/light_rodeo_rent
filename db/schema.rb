@@ -49,13 +49,6 @@ ActiveRecord::Schema.define(version: 2024_10_24_032828) do
     t.index ["tag_id"], name: "index_cards_on_tag_id"
   end
 
-  create_table "service_types", force: :cascade do |t|
-    t.string "english_name"
-    t.string "spanish_name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "services", force: :cascade do |t|
     t.string "english_name"
     t.string "spanish_name"
