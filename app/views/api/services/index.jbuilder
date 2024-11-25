@@ -7,11 +7,12 @@ json.services do
     json.spanish_description  service.spanish_description
     json.dimensions           service.dimensions
 
-    json.tags do
-      json.array! service.tags do |tag|
-        if !tag.inflatable
+    if service.tags
+      json.tags do
+        json.array! service.tags do |tag|
           json.english_name    tag.english_name
           json.spanish_name    tag.spanish_name
+          json.inflatable      tag.inflatable
         end
       end
     end

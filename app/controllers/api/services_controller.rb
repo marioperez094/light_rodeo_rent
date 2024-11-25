@@ -26,6 +26,12 @@ module Api
         render 'api/services/index', 
         status: :ok
       end
+
+      def index_service_tag
+        @services = Service.order(created_at: :asc)
+        render 'api/services/index_service_tag', 
+        status: :ok
+      end
   
       def show
         @service = search_service

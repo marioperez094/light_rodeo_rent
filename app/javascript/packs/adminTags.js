@@ -1,1 +1,1 @@
-import "@pages/adminTags";
+import "@adminPages/adminTags";
