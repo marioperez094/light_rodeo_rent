@@ -7,8 +7,11 @@ class Taggable < ApplicationRecord
   private 
 
   def validates_one_service_tag
-    unless tag.inflatable || service.tags.length === 0 
-      errors.add(:tag, "Este servicio ya tiene un categoria.")
+    if !tag.inflatable
+      @serviceTags = service.tags.select { |tag| !tag.inflatable }
+      if @serviceTags.length > 0
+        return errors.add("Este servicio ya tiene un categoria.")
+      end
     end
   end
 end

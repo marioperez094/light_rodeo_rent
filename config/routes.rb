@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     #Services under a Tag
     get '/tags/:id/services' => 'services#index_by_tag'
     get '/services/tags' => 'services#index_tags'
+    get '/services/search/service_tag' => 'services#index_service_tag'
 
     #Tags under a service
     get '/services/:id/tags' => 'tags#index_by_service'

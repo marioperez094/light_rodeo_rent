@@ -10,9 +10,10 @@ json.services do
     if service.tags
       json.tags do
         json.array! service.tags do |tag|
-          json.english_name    tag.english_name
-          json.spanish_name    tag.spanish_name
-          json.inflatable      tag.inflatable
+          if !tag.inflatable
+            json.english_name    tag.english_name
+            json.spanish_name    tag.spanish_name
+          end
         end
       end
     end

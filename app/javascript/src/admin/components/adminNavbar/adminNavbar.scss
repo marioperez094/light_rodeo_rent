@@ -1,0 +1,40 @@
+@import "@stylesheets/variables.scss";
+
+#adminNavbar {
+  .navbar-brand {
+    &:hover,
+    &:focus-visible {
+      opacity: 0.8;
+    }
+  }
+  
+  .nav-link:hover,
+  .nav-link:focus-visible,
+  .dropdown-item:hover,
+  .dropdown-item:focus-visible {
+    outline: auto;
+    opacity: 0.8;
+  }
+
+  .nav-link {
+    color: white;
+  }
+}
+
+
+@media (max-width: 991.9px) {
+  #navbarMenuToggler, .navbar-brand {
+    position: relative;
+    z-index: 11;
+  }
+
+  #navbarMenu {
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding-top: 60px;
+    z-index: 10;
+  }
+}

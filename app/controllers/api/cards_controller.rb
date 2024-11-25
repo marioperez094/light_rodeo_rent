@@ -7,7 +7,7 @@ module Api
       end
 
       tag = Tag.find_by(id: params[:card][:tag_id])
-      return render json: { error: 'No se encontro el tag.' }, 
+      return render json: { error: 'No se encontro la categoria.' }, 
       status: :not_found if !tag && !params[:card][:isCarousel]
 
       @card = Card.new(card_params)
