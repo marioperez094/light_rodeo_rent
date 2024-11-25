@@ -1,5 +1,5 @@
 //External Imports
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Components
 import { Navbar, ExpandableButton, ExpandableMenu } from "@components/navbarComponents/navbarComponents"; 
@@ -11,16 +11,18 @@ import { useLanguage } from "@context/language";
 //Types
 import { languageType } from "@utils/types";
 
-
-import { generalServices, services } from "@utils/services";
+//Functions
+import { getRequest } from "@utils/fetchRequests";
 
 //Stylesheets
 import "./homeNavbar.scss";
 
-import logo from "@images/light_rodeo_logo.png";
+import { generalServices, services } from "@utils/services";
 
 export default function HomeNavbar() {
   const { language, setLanguage } = useLanguage(); 
+  const [dbServices, setDBServices] = useState([]);
+  const logo = `https://${ process.env.PHOTO_UPLOAD_BUCKET.trim() }.s3.us-east-1.amazonaws.com/Logos+and+images/light_rodeo_logo.png`;
   
   const navTitles: {
     [key: string]: languageType
@@ -37,6 +39,16 @@ export default function HomeNavbar() {
       "english": "About Us!",
       "spanish": "Sobre Nosotros!"
     }
+  };
+
+  useEffect(() => {
+    fetchTags();
+  }, []);
+
+  function fetchTags(): void {
+    getRequest("/api/services", (response: any) => {
+      setDBServices(response.tags);
+    });
   };
 
   return(
@@ -185,7 +197,7 @@ function DropdownItem(
     <li className="px-3">
       <a
         className="dropdown-item"
-        href={`/services/service_type=${ title["English"] }`}
+        href={`/services/service_type=${ title["english"] }`}
       >
         <div
           className="nav-dropdown-image tw-rounded-md"

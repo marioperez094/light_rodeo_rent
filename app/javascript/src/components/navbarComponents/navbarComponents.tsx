@@ -107,26 +107,3 @@ export default function NavDropdown(
     </li>
   )
 };
-
-function DropdownItem(
-  { title }: {
-    title: languageType
-  }) {
-  const { language } = useLanguage();
-
-  return (
-    <li className="px-3">
-      <a
-        className="dropdown-item"
-        href={`/services/service_type=${title["English"]}`}
-      >
-        <div
-          className="nav-dropdown-image tw-rounded-md"
-          id={`${title[language].split(" ").join("")}-nav-image`}
-          aria-hidden
-        />
-        {title[language]}
-      </a>
-    </li>
-  )
-};
