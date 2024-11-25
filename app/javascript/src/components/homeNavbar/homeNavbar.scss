@@ -1,0 +1,121 @@
+@import "@stylesheets/variables.scss";
+
+#homeNavbar {
+  background-color: $primary-color !important;
+
+  .navbar-brand {
+    &:hover {
+      opacity: 0.8;
+    }
+    span {
+      font-size: 15px;
+    }
+    img {
+      display: inline-block;
+      height: 50px;
+    }
+  }
+
+  .nav-link,
+  .dropdown-item {
+    color: white !important;
+  }
+
+  .dropdown-menu {
+    background-color: transparent;
+    border: transparent;
+  }
+
+  .dropdown-item {
+    &:hover,
+    &:focus-visible {
+      background-color: transparent !important;
+    }
+  }
+
+  .nav-link:hover,
+  .nav-link:focus-visible,
+  .dropdown-item:hover,
+  .dropdown-item:focus-visible {
+    outline: auto;
+  }
+
+  .language-dropdown {
+    .dropdown-item:hover {
+      cursor: pointer;
+    }
+  }
+
+  @media (mind-width: 371px) {
+    .navbar-brand span {
+      font-size: 22px;
+    }
+  }
+
+  @media (max-width: 991.9px) {
+    .navbar-toggler {
+      background-color: rgba(256, 256, 256, 0.6);
+      transition: scale 100ms ease-in-out;
+
+      &:hover,
+      &:focus-visible {
+        background-color: rgba(256, 256, 256, 0.8);
+        scale: 1.03;
+      }
+    }
+
+    hr {
+      border-top: solid white 2px;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .phone-number {
+      margin-top: -45px;
+    }
+    
+    .dropdown-horizontal {
+      position: static !important;
+    }
+    
+    .dropdown-menu {
+      background-color: $primary-color;
+    }
+
+    .dropdown-menu[data-bs-popper] {
+      margin-top: 0;
+    }
+
+    .dropdown-menu-expanded {
+      width: 100% !important;
+      text-align: center !important;
+      border-radius: 0;
+
+      >li {
+        display: inline-block;
+      }
+    }
+
+    .nav-dropdown-image {
+      width: 200px;
+      padding-top: calc( 2 / 3 * 100%);
+      background-size: cover !important;
+      background-position: center !important;
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+#large-screen-icon {
+  background-color: $primary-color;
+
+  @media (min-width: 992px) {
+    img {
+      height: 100px;
+    }
+
+    span {
+      font-size: 30px;
+    }
+  }
+}

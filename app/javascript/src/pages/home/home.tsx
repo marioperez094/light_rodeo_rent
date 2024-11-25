@@ -3,6 +3,7 @@ import React from "react";
 
 //Components
 import HomeNavbar from "@components/homeNavbar/homeNavbar";
+import ImageCarousel from "@components/imageCarousel/imageCarousel";
 
 //Context
 import { LanguageProvider, useLanguage } from "@context/language";
@@ -12,6 +13,9 @@ import { getRequest } from "@utils/fetchRequests";
 
 //Types
 import { cardType } from "@utils/types";
+
+//Stylesheets
+import "./home.scss";
 
 type AppProps = {
 };
@@ -61,6 +65,13 @@ class Home extends React.Component<AppProps, AppStates> {
           Skip to Content
         </a>
         <HomeNavbar />
+
+        <main
+          id="main"
+          role="main"
+        >
+          <ImageCarousel />
+        </main>
       </LanguageProvider>
     )
   };

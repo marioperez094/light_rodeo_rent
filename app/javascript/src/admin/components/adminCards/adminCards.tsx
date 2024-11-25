@@ -105,7 +105,7 @@ function AdminCardContent({
         <div className="shadow-lg inner-shadow d-flex justify-content-center align-items-center">
           { card 
             ? <div
-                className="service-image rounded"
+                className="aspect-ratio rounded"
                 style={{ backgroundImage: `url(${ card.image_url })` }} 
               />
             : <FontAwesomeIcon

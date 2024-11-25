@@ -36,3 +36,8 @@ export type cardType = {
   isCarousel: boolean;
   image_url: string;
 };
+
+export type languageType = {
+  "english": string;
+  "spanish": string;
+}
