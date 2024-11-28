@@ -96,6 +96,7 @@
 
     .dropdown-menu {
       background-color: $primary-color;
+      max-height: 200px;
     }
 
     .dropdown-menu[data-bs-popper] {
@@ -106,6 +107,8 @@
       width: 100% !important;
       text-align: center !important;
       border-radius: 0;
+      white-space: nowrap;
+      overflow-x: scroll;
 
       >li {
         display: inline-block;

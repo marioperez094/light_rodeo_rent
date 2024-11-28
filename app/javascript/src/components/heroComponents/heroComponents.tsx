@@ -9,6 +9,7 @@ import { frontPageText } from "@utils/pageText";
 export function PhoneNumber() {
   const { language } = useLanguage();
 
+  console.log("phone")
   return (
     <div className="phone-number-container d-lg-none">
       <h3 className="phone-number heading-text text-end">

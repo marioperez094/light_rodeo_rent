@@ -1,6 +1,6 @@
 import { languageType } from "./types"
 
-export const services: {
+export const inflatables: {
   [key: string]: languageType
 } = {
   jumpers: {
@@ -23,6 +23,15 @@ export const services: {
     "english": "Obstacles",
     "spanish": "Obstáculos",
   },
+  combo: {
+    "english": "Combo",
+    "spanish": "Combo",
+  }
+}
+
+export const snacks: {
+  [key: string]: languageType
+} = {
   popcorn: {
     "english": "Popcorn",
     "spanish": "Palomitas",

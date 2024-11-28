@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 
 //Components
-import { Navbar, ExpandableButton, ExpandableMenu } from "@components/navbarComponents/navbarComponents"; 
+import { ExpandableButton, ExpandableMenu } from "@components/navbarComponents/navbarComponents"; 
 import NavDropdown from "@components/navbarComponents/navbarComponents";
 
 //Context
@@ -17,14 +17,13 @@ import { getRequest } from "@utils/fetchRequests";
 //Stylesheets
 import "./homeNavbar.scss";
 
-import { generalServices, services } from "@utils/services";
+import { generalServices, inflatables, snacks } from "@utils/services";
 import { frontPageText, navTitles } from "@utils/pageText";
 
 export default function HomeNavbar() {
   const { language, setLanguage } = useLanguage(); 
   const [dbServices, setDBServices] = useState([]);
   const logo = `https://${ process.env.PHOTO_UPLOAD_BUCKET }.s3.us-east-1.amazonaws.com/Logos+and+images/light_rodeo_logo.png`;
-
   useEffect(() => {
     fetchTags();
   }, []);
@@ -94,16 +93,16 @@ export default function HomeNavbar() {
             <NavDropdown
               title={ generalServices.inflatables[language] }
             >
-              <DropdownItem title={ services.jumpers } />
-              <DropdownItem title={ services.themed } />
-              <DropdownItem title={ services.waterslides } />
+              { Object.keys(inflatables).map((inflatable) => 
+                <DropdownItem title={ inflatables[inflatable] } key={ inflatable } />
+              )}
             </NavDropdown>
             <NavDropdown
               title={ generalServices.snacks[language] }
             >
-              <DropdownItem title={ services.popcorn } />
-              <DropdownItem title={ services.snoCones } />
-              <DropdownItem title={ services.cottonCandy } />
+              { Object.keys(snacks).map((snack) => 
+                <DropdownItem title={ snacks[snack] } key={ snack } />
+              )}
             </NavDropdown>
             <li className="nav-item">
               <a
