@@ -6,6 +6,8 @@ import HomeNavbar from "@components/homeNavbar/homeNavbar";
 import ImageCarousel from "@components/imageCarousel/imageCarousel";
 import { Slogan, PhoneNumber } from "@components/heroComponents/heroComponents";
 import ServiceWidget from "@components/serviceWidget/serviceWidget";
+import ServiceList from "@components/serviceList/serviceList";
+import Footer from "@components/footer/footer";
 
 //Context
 import { LanguageProvider } from "@context/language";
@@ -23,7 +25,6 @@ type AppProps = {
 };
 
 type AppStates = {
-  cardIndex: number;
   cards: cardType[];
 };
 
@@ -32,7 +33,6 @@ class Home extends React.Component<AppProps, AppStates> {
     super(props);
 
     this.state = {
-      cardIndex: 0,
       cards: [],
     };
   };
@@ -41,23 +41,9 @@ class Home extends React.Component<AppProps, AppStates> {
     getRequest("/api/cards", (response: any) => {
       this.setState({ cards: response.cards })
     })
-
-    this.imageCarouselTimer = setInterval(() => {
-      this.showNextImage();
-      //Milliseconds taht every image changes
-    }, 15000);
-  };
-
-  showNextImage = (): void => {
-    const { cardIndex } = this.state;
-
-    if (cardIndex === 2) return this.setState({ cardIndex: 0 });
-    return this.setState({ cardIndex: cardIndex + 1 });
   };
 
   render(): React.ReactNode {
-    const { cards, cardIndex } = this.state;
-
     return(
       <LanguageProvider>
         <a
@@ -73,8 +59,7 @@ class Home extends React.Component<AppProps, AppStates> {
           role="main"
         >
           <ImageCarousel
-            cards={ cards }
-            cardIndex={ cardIndex }
+            cards={ this.state.cards }
           >
             <PhoneNumber />
             <Slogan />
@@ -87,6 +72,16 @@ class Home extends React.Component<AppProps, AppStates> {
         >
           <ServiceWidget />
         </section>
+
+        <section
+          id="services"
+        >
+          <ServiceList
+            cards={ this.state.cards } 
+          />
+        </section>
+
+        <Footer />
       </LanguageProvider>
     )
   };

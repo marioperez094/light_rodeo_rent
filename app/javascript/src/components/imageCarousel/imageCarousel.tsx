@@ -1,5 +1,5 @@
 //External Imports
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 
 //Types
 import { cardType } from "@utils/types";
@@ -9,24 +9,39 @@ import "./imageCarousel.scss";
 
 export default function ImageCarousel({
   cards,
-  cardIndex,
   children,
 }:{
   cards: cardType[];
-  cardIndex: number;
   children: ReactNode;
 }) {
+  const [cardIndex, setCardIndex] = useState(0);
   const logo = `https://${ process.env.PHOTO_UPLOAD_BUCKET }.s3.us-east-1.amazonaws.com/Logos+and+images/light_rodeo_logo.png`;
+  
+  useEffect(() => {
+    const imageCarouselTimer = setInterval(() => {
+      showNextImage();
+    }, 1500);
 
-  console.log(cards)
+    return () => {
+      clearInterval(imageCarouselTimer);
+    };
+  }, []);
+
+  function showNextImage() {
+    if (cardIndex === cards.length) {
+      setCardIndex(0);
+    }
+    return setCardIndex(prevIndex => prevIndex + 1);
+  }
 
   if (cards.length === 0) return (
     <CarouselContainer>
-      <div className="carousel d-flex justify-content-center shadow">
+      <div className="carousel d-flex justify-content-center">
         <img
           src={ logo }
           className="m-3"
         />
+        { cardIndex }
         { children }
       </div>
     </CarouselContainer>
