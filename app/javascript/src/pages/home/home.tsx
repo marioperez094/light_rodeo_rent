@@ -4,9 +4,11 @@ import React from "react";
 //Components
 import HomeNavbar from "@components/homeNavbar/homeNavbar";
 import ImageCarousel from "@components/imageCarousel/imageCarousel";
+import { Slogan, PhoneNumber } from "@components/heroComponents/heroComponents";
+import ServiceWidget from "@components/serviceWidget/serviceWidget";
 
 //Context
-import { LanguageProvider, useLanguage } from "@context/language";
+import { LanguageProvider } from "@context/language";
 
 //Functions
 import { getRequest } from "@utils/fetchRequests";
@@ -70,8 +72,21 @@ class Home extends React.Component<AppProps, AppStates> {
           id="main"
           role="main"
         >
-          <ImageCarousel />
+          <ImageCarousel
+            cards={ cards }
+            cardIndex={ cardIndex }
+          >
+            <PhoneNumber />
+            <Slogan />
+          </ImageCarousel>
         </main>
+
+        <section
+          className="container-fluid service-widget"
+          aria-label="Service Widget"
+        >
+          <ServiceWidget />
+        </section>
       </LanguageProvider>
     )
   };

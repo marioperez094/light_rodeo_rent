@@ -1,19 +1,21 @@
 @import "@stylesheets/variables.scss";
 
 #homeNavbar {
-  background-color: $primary-color !important;
+  background-color: $primary-color;
 
   .navbar-brand {
     &:hover {
       opacity: 0.8;
     }
-    span {
-      font-size: 15px;
-    }
-    img {
-      display: inline-block;
-      height: 50px;
-    }
+  }
+
+  span {
+    font-size: 15px;
+  }
+
+  img {
+    display: inline-block;
+    height: 50px;
   }
 
   .nav-link,
@@ -40,13 +42,16 @@
     outline: auto;
   }
 
-  .language-dropdown {
-    .dropdown-item:hover {
-      cursor: pointer;
+  .phone-number a {
+    transition: scale 100ms ease-in-out;
+
+    &:hover,
+    &:focus-visible {
+      scale: 1.03;
     }
   }
 
-  @media (mind-width: 371px) {
+  @media (min-width: 371px) {
     .navbar-brand span {
       font-size: 22px;
     }
@@ -54,12 +59,13 @@
 
   @media (max-width: 991.9px) {
     .navbar-toggler {
-      background-color: rgba(256, 256, 256, 0.6);
-      transition: scale 100ms ease-in-out;
+      color: white;
+      transition: scale 100ms ease-in-out, color 500ms ease-in-out;
 
       &:hover,
       &:focus-visible {
         background-color: rgba(256, 256, 256, 0.8);
+        color: black;
         scale: 1.03;
       }
     }
@@ -70,14 +76,24 @@
   }
 
   @media (min-width: 992px) {
+    .navbar-brand {
+      img {
+        height: 100px;
+      }
+
+      span {
+        font-size: 30px;
+      }
+    }
+
     .phone-number {
       margin-top: -45px;
     }
-    
+
     .dropdown-horizontal {
       position: static !important;
     }
-    
+
     .dropdown-menu {
       background-color: $primary-color;
     }
@@ -102,20 +118,6 @@
       background-size: cover !important;
       background-position: center !important;
       background-repeat: no-repeat;
-    }
-  }
-}
-
-#large-screen-icon {
-  background-color: $primary-color;
-
-  @media (min-width: 992px) {
-    img {
-      height: 100px;
-    }
-
-    span {
-      font-size: 30px;
     }
   }
 }

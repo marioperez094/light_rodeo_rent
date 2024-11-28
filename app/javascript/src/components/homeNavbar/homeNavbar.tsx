@@ -18,28 +18,12 @@ import { getRequest } from "@utils/fetchRequests";
 import "./homeNavbar.scss";
 
 import { generalServices, services } from "@utils/services";
+import { frontPageText, navTitles } from "@utils/pageText";
 
 export default function HomeNavbar() {
   const { language, setLanguage } = useLanguage(); 
   const [dbServices, setDBServices] = useState([]);
-  const logo = `https://${ process.env.PHOTO_UPLOAD_BUCKET.trim() }.s3.us-east-1.amazonaws.com/Logos+and+images/light_rodeo_logo.png`;
-  
-  const navTitles: {
-    [key: string]: languageType
-  } = {
-    logIn: {
-      "english": "Log In/Sign Up",
-      "spanish": "Iniciar/Inscribirse",
-    },
-    rentNow: {
-      "english": "Rent Now!",
-      "spanish": "Renta Ahora!"
-    },
-    aboutUs: {
-      "english": "About Us!",
-      "spanish": "Sobre Nosotros!"
-    }
-  };
+  const logo = `https://${ process.env.PHOTO_UPLOAD_BUCKET }.s3.us-east-1.amazonaws.com/Logos+and+images/light_rodeo_logo.png`;
 
   useEffect(() => {
     fetchTags();
@@ -52,7 +36,10 @@ export default function HomeNavbar() {
   };
 
   return(
-    <>
+    <nav 
+      aria-label="Navigation Bar"
+      id="homeNavbar"
+    >
       { /* Large screen icons */}
       <div
         id="large-screen-icon" 
@@ -71,7 +58,8 @@ export default function HomeNavbar() {
           </span>
         </a>
       </div>
-      <Navbar navbarID="homeNavbar">
+      <div className="navbar navbar-expand-lg navbar-light">
+        <div className="container-fluid">
         <a
           className="navbar-brand d-lg-none"
           href="/"
@@ -90,7 +78,7 @@ export default function HomeNavbar() {
             <li className="nav-item d-none d-lg-block">
               <h3 className="phone-number heading-text">
                 <span className="text-outline">
-                  { navTitles.rentNow[language] }
+                  { frontPageText.rentNow[language] }
                 </span>
                 <a
                   className="btn btn-warning d-block"
@@ -182,13 +170,16 @@ export default function HomeNavbar() {
             </li>
           </ul>
         </ExpandableMenu>
-      </Navbar>
-    </>
+        </div>
+      </div>
+    </nav>
   )
 };
 
 function DropdownItem(
-  { title }: {
+  { 
+    title 
+  }: {
     title: languageType
   }) {
   const { language } = useLanguage();
