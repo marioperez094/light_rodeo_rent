@@ -45,6 +45,7 @@ export default function ServiceForm({
                     value={ service[field.name] }
                     handleChange={ handleChange }
                     wordCount={ field.wordCount } 
+                    required={ field.required }
                   />
               }
             </React.Fragment>

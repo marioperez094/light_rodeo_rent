@@ -1,6 +1,11 @@
 class StaticPagesController < ApplicationController
   def home
-    render "home"
+    render 'home'
+  end
+
+  def service_filter
+    @data = { tag_id: params[:id] }.to_json
+    render 'service_filter'
   end
 
   def admin

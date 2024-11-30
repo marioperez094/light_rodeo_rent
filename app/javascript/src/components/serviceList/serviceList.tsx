@@ -12,7 +12,8 @@ export default function ServiceList({
 } : {
   cards: cardType[];
 }) {
-  const serviceBoxArray = [1, 2, 3, 4, 5, 6]
+  const serviceBoxArray = [0, 1, 2, 3, 4, 5]
+  const serviceCards = cards.filter(card => !card.isCarousel);
 
   return(
     <div
@@ -22,7 +23,7 @@ export default function ServiceList({
         { serviceBoxArray.map((num: number) =>
           <React.Fragment key={ num }>
             <ServiceBox
-              card={cards[num]}
+              card={serviceCards[num]}
             />
           </React.Fragment>
         )}

@@ -1,13 +1,20 @@
 //External Imports
 import React from "react";
 
+//Types
+import { tagType } from "@utils/types";
+
+//Context
+import { useLanguage } from "@context/language";
+
 export default function FooterContent({
   title,
-  links,
+  tags,
 } : {
   title: string;
-  links: string[];
+  tags: tagType[];
 }) {
+  const { language } = useLanguage();
 
   return (
     <>
@@ -15,13 +22,17 @@ export default function FooterContent({
       <div className="col-12 col-xl-4 py-3 py-xl-0">
         <h6>{ title }</h6>
         <div className="row">
-          { links.map((link) => {
+          { tags.map((tag) => {
             return (
               <div
-                key={ link }
+                key={ tag.id }
                 className="col-12 col-sm-4 col-xl-12"
               >
-                <a href="#">{ link }</a>
+                <a 
+                  href={`/service-type/${ tag.id }`}
+                >
+                  { tag[`${ language }_name`] }
+                </a>
               </div>
             )
           })

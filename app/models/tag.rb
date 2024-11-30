@@ -1,7 +1,7 @@
 class Tag < ApplicationRecord
   has_many :taggables
-  has_many :services, through: :taggables, dependent: :nullify
-  has_one :card, dependent: :nullify
+  has_many :services, through: :taggables, dependent: :destroy
+  has_one :card, dependent: :destroy
 
   validates :english_name, presence: true, length: { minimum: 3, maximum: 30 }
   validates :spanish_name, presence: true, length: { minimum: 3, maximum: 30 }

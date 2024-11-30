@@ -39,8 +39,16 @@
     overflow-y: scroll;
     border: 2px solid lightgray;
 
-    .aspect-ratio {
-      min-height: 400px;
+    .service-image {
+      min-height: 300px;
     }
+  }
+
+  .service-image {
+    height: 100%;
+    width: 100%;
+    max-height: 400px;
+    background-size: cover;
+    background-position: center;
   }
 }

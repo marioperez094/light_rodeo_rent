@@ -56,7 +56,7 @@ class AdminCardLoad extends React.Component<AppProps, AppStates> {
         ...this.state.card,
         [e.target.name]: e.target.value
       },
-    }, () => console.log(this.state.card));
+    });
   };
 
   submitCard = (e: FormEvent<HTMLFormElement>, value: void): void => {

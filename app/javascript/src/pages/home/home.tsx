@@ -2,12 +2,12 @@
 import React from "react";
 
 //Components
-import HomeNavbar from "@components/homeNavbar/homeNavbar";
 import ImageCarousel from "@components/imageCarousel/imageCarousel";
 import { Slogan, PhoneNumber } from "@components/heroComponents/heroComponents";
 import ServiceWidget from "@components/serviceWidget/serviceWidget";
 import ServiceList from "@components/serviceList/serviceList";
-import Footer from "@components/footer/footer";
+import SkipContent from "@components/skipContent/skipContent";
+import HomeLayout from "@components/homeLayout/homeLayout";
 
 //Context
 import { LanguageProvider } from "@context/language";
@@ -38,28 +38,32 @@ class Home extends React.Component<AppProps, AppStates> {
   };
 
   componentDidMount(): void {
+    this.fetchAPI();
+  };
+
+  fetchAPI = (): void => {
     getRequest("/api/cards", (response: any) => {
       this.setState({ cards: response.cards })
-    })
+    });
   };
 
   render(): React.ReactNode {
+    const { cards } = this.state;
+    const footerImage = cards.filter(card => card.isCarousel)[0]?.image_url;
+
     return(
       <LanguageProvider>
-        <a
-          className="skip-content"
-          href="#services"
+        <SkipContent link="#services" />
+        <HomeLayout
+          layoutImage={ footerImage }
         >
-          Skip to Content
-        </a>
-        <HomeNavbar />
 
         <main
           id="main"
           role="main"
         >
           <ImageCarousel
-            cards={ this.state.cards }
+            cards={ cards }
           >
             <PhoneNumber />
             <Slogan />
@@ -70,18 +74,20 @@ class Home extends React.Component<AppProps, AppStates> {
           className="container-fluid service-widget"
           aria-label="Service Widget"
         >
-          <ServiceWidget />
+          <ServiceWidget
+          />
         </section>
 
         <section
           id="services"
+          aria-label="Services"
         >
           <ServiceList
-            cards={ this.state.cards } 
+            cards={ cards } 
           />
         </section>
-
-        <Footer />
+        
+        </HomeLayout>
       </LanguageProvider>
     )
   };

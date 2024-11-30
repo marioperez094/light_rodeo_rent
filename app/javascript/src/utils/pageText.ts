@@ -18,7 +18,11 @@ export const frontPageText: {
   search: {
     "english": "Search",
     "spanish": "Buscar",
-  }
+  },
+  rent: {
+    "english": "Rentals",
+    "spanish": "Renta"
+  },
 };
 
 export const navTitles: {

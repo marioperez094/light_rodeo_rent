@@ -110,6 +110,13 @@
       white-space: nowrap;
       overflow-x: scroll;
 
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
       >li {
         display: inline-block;
       }

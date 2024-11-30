@@ -38,8 +38,13 @@
     }
   }
 
+  .service-list { 
+    background-color: $thirtiary-color;
+  }
+
   .service {
     transition: outline 100ms ease-in-out;
+    background-color: white;
     
     a {
       text-decoration: none;

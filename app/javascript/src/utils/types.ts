@@ -10,6 +10,7 @@ export type formFields = {
   type?: string;
   wordCount?: boolean;
   textArea?: boolean;
+  required?: boolean;
 };
 
 export type tagType = {

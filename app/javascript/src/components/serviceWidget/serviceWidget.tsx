@@ -14,17 +14,14 @@ import { frontPageText } from "@utils/pageText";
 
 export default function ServiceWidget() {
   const { language } = useLanguage();
+  const [widget, setWidget] = useState(1);
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
-    fetchTags();
-  }, [])
-
-  function fetchTags() {
     getRequest("/api/tags", (response: any) => {
       setTags(response.tags);
-    })
-  };
+    });
+  }, []);
 
   return(
     <form className="rounded p-4">
@@ -35,8 +32,9 @@ export default function ServiceWidget() {
         className="form-select"
         aria-label="Choose an Attraction"
         id="choose-fun"
+        value={ widget }
+        onChange={ (e) => setWidget(e.target.value) }
       >
-        <option value={ 0 } disabled></option>
         { tags.map((tag: tagType) => 
           <option
             key={ tag.id }
@@ -47,12 +45,14 @@ export default function ServiceWidget() {
         }
       </select>
       <div className="schedule-widget-button-container d-flex flex-column">
-        <button
+        <a
           type="submit"
           className="btn btn-warning px-4 py-2 mt-4"
+          disabled={ widget === 0 }
+          href={ `/service-type/${ widget }` }
         >
           { frontPageText.search[language] }
-        </button>
+        </a>
       </div>
     </form>
   )

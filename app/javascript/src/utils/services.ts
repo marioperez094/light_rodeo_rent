@@ -1,56 +1,5 @@
 import { languageType } from "./types"
 
-export const inflatables: {
-  [key: string]: languageType
-} = {
-  jumpers: {
-    "english": "Jumpers",
-    "spanish": "Saltadores",
-  },
-  themed: {
-    "english": "Themed",
-    "spanish": "Temáticos",
-  },
-  slides: {
-    "english": "Slides",
-    "spanish": "Resbaladera",
-  },
-  waterslides: {
-    "english": "Waterslides",
-    "spanish": "Tobogán",
-  },
-  obstacles: {
-    "english": "Obstacles",
-    "spanish": "Obstáculos",
-  },
-  combo: {
-    "english": "Combo",
-    "spanish": "Combo",
-  }
-}
-
-export const snacks: {
-  [key: string]: languageType
-} = {
-  popcorn: {
-    "english": "Popcorn",
-    "spanish": "Palomitas",
-  },
-  snoCones: {
-    "english": "Sno-cones",
-    "spanish": "Raspados",
-  },
-  cottonCandy: {
-    "english": "Cotton Candy",
-    "spanish": "Algodón de Azúcar",
-  },
-  iceCream: {
-    "english": "Ice cream",
-    "spanish": "Nieve"
-  }
-
-};
-
 export const generalServices: {
   [key: string]: languageType
 } = {
@@ -58,9 +7,9 @@ export const generalServices: {
     "english": "Inflatables",
     "spanish": "Inflables",
   },
-  snacks: {
-    "english": "Snacks",
-    "spanish": "Bocadillos",
+  services: {
+    "english": "Services",
+    "spanish": "Servicios",
   },
   tacos: {
     "english": "Tacos",

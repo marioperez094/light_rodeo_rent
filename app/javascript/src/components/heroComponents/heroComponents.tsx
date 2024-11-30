@@ -8,8 +8,7 @@ import { frontPageText } from "@utils/pageText";
 
 export function PhoneNumber() {
   const { language } = useLanguage();
-
-  console.log("phone")
+  
   return (
     <div className="phone-number-container d-lg-none">
       <h3 className="phone-number heading-text text-end">
@@ -20,7 +19,7 @@ export function PhoneNumber() {
           className="btn btn-warning d-block"
           href="#"
         >
-          (602) 435-6640
+          (480) 658-7150
         </a>
       </h3>
     </div>
@@ -35,6 +34,23 @@ export function Slogan() {
       <h3 className="slogan heading-text text-outline text-center">
         { frontPageText.slogan[language] }
       </h3>
+    </div>
+  )
+};
+
+export function HeroTitle({ 
+  title,
+} : { 
+  title: string;
+}) {
+  const { language } = useLanguage();
+  
+
+  return (
+    <div className="hero-title-container rounded">
+      <h1 className="hero-title heading-text text-outline text-center">
+        { title }
+      </h1>
     </div>
   )
 };

@@ -9,6 +9,8 @@ import ActiveTab from "@adminComponents/serviceComponents/activeTab";
 import DeleteService from "@adminComponents/serviceComponents/deleteService";
 import ServiceEditor from "@adminComponents/serviceComponents/serviceEditor";
 import ServiceTags from "@adminComponents/serviceComponents/serviceTags";
+import PageHeader from "@components/headers/pageHeaders";
+import ImageSlider from "@adminComponents/serviceComponents/imageSlider";
 
 //Functions
 import { getRequest } from "@utils/fetchRequests";
@@ -78,7 +80,9 @@ class AdminService extends React.Component<AppProps, AppStates> {
               Borrar el Servicio
             </ActiveTab>
           </div>
+          <PageHeader title={ service.spanish_name } />
         </header>
+        <ImageSlider images={ service.images } />
         <main className="container-fluid">
           <Routes>
             <Route

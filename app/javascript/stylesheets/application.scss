@@ -21,6 +21,23 @@
   background-position: center;
 }
 
+.layout-image {
+  background-size: cover;
+  background-position: 50% 70%;
+  background-repeat: no-repeat;
+}
+
+nav {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+
+.carousel-container {
+  padding: 0 0;
+  z-index: 0;
+}
+
 .skip-content {
   position: absolute;
   width: 1px;
