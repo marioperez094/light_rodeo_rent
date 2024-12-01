@@ -4,21 +4,19 @@ import React from "react";
 //Components
 import SkipContent from "@components/skipContent/skipContent";
 import HomeLayout from "@components/homeLayout/homeLayout";
-import { TagImage } from "@components/imageCarousel/imageCarousel";
+import ImageCarousel from "@components/imageCarousel/imageCarousel";
 import { HeroTitle } from "@components/heroComponents/heroComponents";
-
-//Context
-import { LanguageProvider } from "@context/language";
-
-//Types
-import { tagType } from "@utils/types";
+import TagList from "@components/tagList/tagList";
+import NoResults from "@components/noResults/noResults";
 
 //Functions
 import { getRequest } from "@utils/fetchRequests";
 
+//Types
+import { tagType, languageType} from "@utils/types";
+
 //Stylesheets
 import "./serviceFilter.scss";
-import { frontPageText } from "../../utils/pageText";
 
 type AppProps = {
   tag_id: number;
@@ -51,14 +49,18 @@ class ServiceFilter extends React.Component<AppProps, AppStates> {
   render() {
     const { tag } = this.state;
 
-    if (!tag.services) return;
+
+    if (!tag.services) return <NoResults />;
 
     const layoutImages = tag.services[0].images[0].image_url;
-    const title = `${ tag[`${ this.props.language }_name`] } ${ frontPageText.rent[this.props.language] }`
+    const title: languageType = {
+      "english": `${ tag.english_name } ${ tag.inflatable && "Inflatables"} Rental`,
+      "spanish": `Renta de ${ tag.inflatable && "Inflables"} ${ tag.spanish_name }`,
+    } 
 
     return(
       <>
-        <SkipContent link="#" />
+        <SkipContent link="#services" />
         <HomeLayout
           layoutImage={ layoutImages } 
         >
@@ -66,13 +68,15 @@ class ServiceFilter extends React.Component<AppProps, AppStates> {
             id="main"
             role="main"
           >
-            <TagImage
+            <ImageCarousel
               image={ layoutImages }
             >
               <HeroTitle 
-                title={ title }
+                title={ title[this.props.language] }
               />
-            </TagImage>
+            </ImageCarousel>
+
+            <TagList tag={ tag } />
           </main>
 
         </HomeLayout>

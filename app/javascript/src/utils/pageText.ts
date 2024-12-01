@@ -20,7 +20,7 @@ export const frontPageText: {
     "spanish": "Buscar",
   },
   rent: {
-    "english": "Rentals",
+    "english": "Rent",
     "spanish": "Renta"
   },
 };

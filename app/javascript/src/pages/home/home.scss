@@ -1,17 +1,6 @@
 @import "@stylesheets/variables.scss";
 
 #home {
-  nav {
-    position: absolute;
-    width: 100%;
-    z-index: 1;
-  }
-
-  .carousel-container {
-    padding: 0 0;
-    z-index: 0;
-  }
-
   .slogan-container {
     background-color: $primary-color;
     position: absolute;
@@ -27,7 +16,7 @@
     }
   }
 
-  .schedule-widget-button-container {
+  .service-widget-button-container {
     .btn-warning {
       transition: scale 100ms ease-in-out;
 
@@ -35,34 +24,6 @@
       &:focus-visible {
         scale: 1.03;
       }
-    }
-  }
-
-  .service-list { 
-    background-color: $thirtiary-color;
-  }
-
-  .service {
-    transition: outline 100ms ease-in-out;
-    background-color: white;
-    
-    a {
-      text-decoration: none;
-      color: inherit;
-
-      .service-image {
-        transition: scale 100ms ease-in-out;
-      }
-    }
-
-    header {
-      padding: 5px;
-    }
-
-    &:hover,
-    &:focus-visible {
-      scale: 1.03;
-      outline: auto;
     }
   }
 

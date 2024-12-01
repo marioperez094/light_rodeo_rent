@@ -1,0 +1,29 @@
+@import "@stylesheets/variables.scss";
+
+.service-list {
+  background-color: $thirtiary-color;
+}
+
+.service {
+  transition: outline 100ms ease-in-out;
+  background-color: white;
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+
+    .service-image {
+      transition: scale 100ms ease-in-out;
+    }
+  }
+
+  header {
+    padding: 5px;
+  }
+
+  &:hover,
+  &:focus-visible {
+    scale: 1.03;
+    outline: auto;
+  }
+}

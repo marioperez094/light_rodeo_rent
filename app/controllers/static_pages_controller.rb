@@ -8,6 +8,11 @@ class StaticPagesController < ApplicationController
     render 'service_filter'
   end
 
+  def service
+    @data = { service_id: params[:id] }.to_json
+    render 'service'
+  end
+
   def admin
     admin_check
   end

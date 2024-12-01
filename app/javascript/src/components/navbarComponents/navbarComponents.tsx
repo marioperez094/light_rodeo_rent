@@ -76,7 +76,7 @@ export function NavItem({
   )
 };
 
-export default function NavDropdown(
+export function NavDropdown(
   {
     title,
     children
@@ -96,13 +96,15 @@ export default function NavDropdown(
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        {title}
+        { title }
       </a>
       <ul
         className="dropdown-menu dropdown-menu-expanded"
         aria-labelledby={`${ title }Dropdown`}
       >
-        {children}
+        <div className="dropdown-menu-container ms-auto me-auto">
+          { children }
+        </div>
       </ul>
     </li>
   )

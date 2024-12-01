@@ -1,13 +1,13 @@
 //External Imports
-import React from "react";
+import React, { ReactNode } from "react";
 
 //Components
-import ImageCarousel from "@components/imageCarousel/imageCarousel";
-import { Slogan, PhoneNumber } from "@components/heroComponents/heroComponents";
-import ServiceWidget from "@components/serviceWidget/serviceWidget";
-import ServiceList from "@components/serviceList/serviceList";
 import SkipContent from "@components/skipContent/skipContent";
 import HomeLayout from "@components/homeLayout/homeLayout";
+import ImageCarousel from "@components/imageCarousel/imageCarousel";
+import ServiceWidget from "@components/serviceWidget/serviceWidget";
+import ServiceList from "@components/serviceList/serviceList";
+import { PhoneNumber, Slogan } from "@components/heroComponents/heroComponents";
 
 //Context
 import { LanguageProvider } from "@context/language";
@@ -25,7 +25,8 @@ type AppProps = {
 };
 
 type AppStates = {
-  cards: cardType[];
+  carouselCards: cardType[];
+  serviceCards: cardType[];
 };
 
 class Home extends React.Component<AppProps, AppStates> {
@@ -33,64 +34,70 @@ class Home extends React.Component<AppProps, AppStates> {
     super(props);
 
     this.state = {
-      cards: [],
+      carouselCards: [],
+      serviceCards: [],
     };
   };
 
-  componentDidMount(): void {
-    this.fetchAPI();
-  };
+componentDidMount(): void {
+  this.fetchAPI();
+};
 
-  fetchAPI = (): void => {
-    getRequest("/api/cards", (response: any) => {
-      this.setState({ cards: response.cards })
-    });
-  };
+fetchAPI = (): void => {
+  getRequest("/api/cards", (response: any) => {
+    this.filterCards(response.cards);
+  });
+};
 
-  render(): React.ReactNode {
-    const { cards } = this.state;
-    const footerImage = cards.filter(card => card.isCarousel)[0]?.image_url;
+filterCards = (cards: cardType): void => {
+  const carouselCards = [];
+  const serviceCards = [];
+
+  cards.forEach((card: cardType) => {
+    if (card.isCarousel) return carouselCards.push(card);
+    return serviceCards.push(card);
+  });
+
+  this.setState({ serviceCards, carouselCards });
+};
+
+  render(): ReactNode {
+    const { carouselCards, serviceCards } = this.state;
+    const layoutImage = carouselCards[0]?.image_url;
 
     return(
       <LanguageProvider>
-        <SkipContent link="#services" />
-        <HomeLayout
-          layoutImage={ footerImage }
-        >
-
-        <main
-          id="main"
-          role="main"
-        >
-          <ImageCarousel
-            cards={ cards }
-          >
-            <PhoneNumber />
-            <Slogan />
-          </ImageCarousel>
-        </main>
-
-        <section
-          className="container-fluid service-widget"
-          aria-label="Service Widget"
-        >
-          <ServiceWidget
-          />
-        </section>
-
-        <section
-          id="services"
-          aria-label="Services"
-        >
-          <ServiceList
-            cards={ cards } 
-          />
-        </section>
         
+        <SkipContent link="#services" />
+        
+        <HomeLayout
+          layoutImage={ layoutImage }
+        >
+          <main
+            id="main"
+            role="Main"
+          >
+            <ImageCarousel
+              cards={ carouselCards }
+            >
+              
+              <PhoneNumber />
+              
+              <Slogan />
+            
+            </ImageCarousel>
+            
+            <ServiceWidget />
+            
+            <ServiceList
+              cards={ serviceCards }
+            />
+          
+          </main>
         </HomeLayout>
       </LanguageProvider>
     )
-  };
+  }
 };
 
 export default Home;
