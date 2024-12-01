@@ -2,9 +2,7 @@
 import React, { ChangeEvent, FormEvent } from "react";
 
 //Components
-import ImageSlider from "./imageSlider";
 import ServiceForm from "@adminComponents/serviceForm/serviceForm";
-import PageHeader from "@components/headers/pageHeaders";
 
 //Functions
 import { setServiceFormData } from "@utils/utils";
@@ -69,18 +67,12 @@ class ServiceEditor extends React.Component<AppProps, AppStates> {
     const { loading, service } = this.state;
 
     return(
-      <>
-        <PageHeader title={ this.props.service.spanish_name } />
-        <ImageSlider images={ service.images } />
-        <main className="container-fluid">
-          <ServiceForm
-            loading={ loading }
-            service={ service }
-            handleChange={ this.handleChange }
-            onSubmit={ this.submitService }
-          />
-        </main>
-      </>
+      <ServiceForm
+        loading={ loading }
+        service={ service }
+        handleChange={ this.handleChange }
+        onSubmit={ this.submitService }
+      />
     )
   };
 };

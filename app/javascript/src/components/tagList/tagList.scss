@@ -1,0 +1,13 @@
+#tag-list{
+  .description-box{
+    font-size: 17px;
+    line-height: 25px;
+    max-height: 75px;
+    overflow: hidden;
+    /* using line clamp */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+  }
+}

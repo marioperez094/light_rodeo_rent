@@ -99,10 +99,11 @@ function AdminCardContent({
   title: string;
   card: cardType;
 }) {
+  
   return(
     <div className="shadow text-center">
       <div className="admin-carousel-border">
-        <div className="shadow-lg inner-shadow d-flex justify-content-center align-items-center">
+        <div className="shadow-lg inner-shadow d-flex align-items-center justify-content-center">
           { card 
             ? <div
                 className="service-image rounded"

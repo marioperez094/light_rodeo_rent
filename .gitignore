@@ -41,3 +41,4 @@ yarn-debug.log*
 
 #Ignores images uploaded
 /app/assets/images
+.env

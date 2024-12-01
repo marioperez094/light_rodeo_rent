@@ -10,6 +10,7 @@ export type formFields = {
   type?: string;
   wordCount?: boolean;
   textArea?: boolean;
+  required?: boolean;
 };
 
 export type tagType = {
@@ -36,3 +37,8 @@ export type cardType = {
   isCarousel: boolean;
   image_url: string;
 };
+
+export type languageType = {
+  "english": string;
+  "spanish": string;
+}

@@ -6,10 +6,6 @@
   max-width: 1920px;
 }
 
-.pointer-link:hover {
-  cursor: pointer;
-}
-
 .heading-text {
   color: black;
   font-family: $brand-font;
@@ -23,4 +19,21 @@
   padding-top: calc(2 / 3 * 100%);
   background-size: cover;
   background-position: center;
+}
+
+.layout-image {
+  background-size: cover;
+  background-position: 50% 70%;
+  background-repeat: no-repeat;
+}
+
+nav {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+
+.carousel-container {
+  padding: 0 0;
+  z-index: 0;
 }

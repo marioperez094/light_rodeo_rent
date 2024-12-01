@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
+  
   root to: 'static_pages#home'
+
+  #Home pages
+  get '/service-type/:id' => 'static_pages#service_filter'
+  get '/service/:id' => 'static_pages#service'
 
   #Admin pages
   get '/admin' => 'static_pages#admin'
@@ -29,6 +34,9 @@ Rails.application.routes.draw do
     #Tags under a service
     get '/services/:id/tags' => 'tags#index_by_service'
     get '/services/:id/tags-in-services' => 'tags#all_tags_includes_service'
+
+    #Tags
+    get '/tags_with_image' => 'tags#tags_with_service_image'
 
     #Taggables
     delete '/taggables/:tag_id/:service_id' => 'taggables#destroy'

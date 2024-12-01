@@ -1,0 +1,175 @@
+@import "@stylesheets/variables.scss";
+
+#homeNavbar {
+  background-color: $primary-color;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+
+  .navbar-brand {
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  span {
+    font-size: 15px;
+  }
+
+  img {
+    display: inline-block;
+    height: 50px;
+  }
+
+  .nav-link,
+  .dropdown-item {
+    color: white !important;
+  }
+
+  .dropdown-menu {
+    background-color: transparent;
+    border: transparent;
+  }
+
+  .dropdown-item {
+    &:hover,
+    &:focus-visible {
+      background-color: transparent !important;
+    }
+  }
+
+  .nav-link:hover,
+  .nav-link:focus-visible,
+  .dropdown-item:hover,
+  .dropdown-item:focus-visible {
+    outline: auto;
+  }
+
+  .phone-number a {
+    transition: scale 100ms ease-in-out;
+
+    &:hover,
+    &:focus-visible {
+      scale: 1.03;
+    }
+  }
+
+  @media (min-width: 371px) {
+    .navbar-brand span {
+      font-size: 22px;
+    }
+  }
+
+  @media (max-width: 991.9px) {
+    .navbar-toggler {
+      color: white;
+      transition: scale 100ms ease-in-out, color 500ms ease-in-out;
+
+      &:hover,
+      &:focus-visible {
+        background-color: rgba(256, 256, 256, 0.8);
+        color: black;
+        scale: 1.03;
+      }
+    }
+
+    hr {
+      border-top: solid white 2px;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .navbar-brand {
+      img {
+        height: 100px;
+      }
+
+      span {
+        font-size: 30px;
+      }
+    }
+
+    .phone-number {
+      margin-top: -45px;
+    }
+
+    .dropdown-horizontal {
+      position: static !important;
+    }
+
+    .dropdown-menu {
+      background-color: $primary-color;
+      max-height: 200px;
+      
+    }
+
+    .dropdown-menu[data-bs-popper] {
+      margin-top: 0;
+    }
+
+    .dropdown-menu-expanded {
+      width: 100%;
+      text-align: center;
+      border-radius: 0;
+      white-space: nowrap;
+    }
+
+    .dropdown-menu-container {
+      white-space: nowrap;
+      max-width: 90%;
+      overflow-x: scroll;
+
+      > li {
+        display: inline-block;
+      }
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .nav-dropdown-image {
+      width: 200px;
+      padding-top: calc(2 / 3 * 100%);
+      background-size: cover !important;
+      background-position: center !important;
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+
+#homeFooter {
+  background-color: $primary-color;
+  padding: 20px 24px 15px;
+
+  .container-fluid {
+    max-width: 1080px;
+  }
+
+  hr {
+    color: white;
+  }
+
+  .service-list:first-child {
+    margin: 0;
+    border-top: none;
+  }
+
+  h6, p, small {
+    color: white;
+  }
+
+  a {
+    font-size: 15px;
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

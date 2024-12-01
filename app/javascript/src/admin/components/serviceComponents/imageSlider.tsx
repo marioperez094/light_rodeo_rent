@@ -14,7 +14,7 @@ export default function ImageSlider({ images }: { images: [] }) {
       { images.map((image, index) => {
         return (
           <div className="col-12 col-md-6 col-xl-4" key={ index }>
-            <div className="service-image rounded" style={{ backgroundImage: `url(${ image.image_url })`}} />
+            <div className="aspect-ratio rounded" style={{ backgroundImage: `url(${ image.image_url })`}} />
           </div>
         )
       })}

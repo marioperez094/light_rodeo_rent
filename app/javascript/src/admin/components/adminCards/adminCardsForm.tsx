@@ -187,7 +187,7 @@ function ServiceImages({
   return(
     <article className="col-12">
       <h6>Elige una imagen</h6>
-      <div className="row service-images p-2">
+      <div className="row aspect-ratio p-2">
         { images.map(image => {
           return(
             <div
@@ -209,7 +209,7 @@ function ServiceImages({
                   className="col-10"
                 >
                   <div
-                    className="service-image rounded"
+                    className="aspect-ratio rounded"
                     style={{ backgroundImage: `url(${ image.image_url })` }}
                   />
                 </label>

@@ -24,6 +24,12 @@ module Api
             status: :ok
         end
 
+        def tags_with_service_image
+            @tags = Tag.order(created_at: :asc)
+            render 'api/tags/indexWithImage', 
+            status: :ok
+        end
+
         def show
             @tag = search_tag
             return render json: { error: 'No se encontro el tag' },

@@ -38,6 +38,7 @@ export function ExpandableButton() {
       <FontAwesomeIcon
         className="navbar-toggler-icon"
         icon={ faBars }
+        aria-hidden
       />
     </button>
   )
@@ -66,11 +67,45 @@ export function NavItem({
   return (
     <li className="nav-item">
       <a
-        className={ `nav-link mx-3 ${ active && "active" }` }
+        className={ "nav-link mx-3" }
         href={ link }
       >
         { title }
       </a>
+    </li>
+  )
+};
+
+export function NavDropdown(
+  {
+    title,
+    children
+  }:
+    {
+      title: string
+      children: React.ReactNode
+    }
+) {
+  return (
+    <li className="nav-item dropdown dropdown-horizontal">
+      <a
+        className="nav-link dropdown-toggle me-3"
+        href="#"
+        id={`${ title }Dropdown`}
+        role="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        { title }
+      </a>
+      <ul
+        className="dropdown-menu dropdown-menu-expanded"
+        aria-labelledby={`${ title }Dropdown`}
+      >
+        <div className="dropdown-menu-container ms-auto me-auto">
+          { children }
+        </div>
+      </ul>
     </li>
   )
 };

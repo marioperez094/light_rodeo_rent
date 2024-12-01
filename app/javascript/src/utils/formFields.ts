@@ -33,6 +33,7 @@ export const serviceFields: formFields[] = [{
 }, {
   name: "dimensions",
   label: "Dimensiones",
+  required: false,
 }];
 
 export const tagFields: formFields[] = [{

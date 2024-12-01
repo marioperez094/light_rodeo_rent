@@ -1,0 +1,56 @@
+@import "@stylesheets/variables.scss";
+
+#home {
+  .slogan-container {
+    background-color: $primary-color;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+
+  .service-widget {
+    form {
+      background-color: white;
+      font-weight: 500;
+    }
+  }
+
+  .service-widget-button-container {
+    .btn-warning {
+      transition: scale 100ms ease-in-out;
+
+      &:hover,
+      &:focus-visible {
+        scale: 1.03;
+      }
+    }
+  }
+
+  @media (max-width: 991.9px) {
+    .phone-number-container {
+      position: absolute;
+      right: 24px;
+      top: 40%;
+    }
+
+    .phone-number {
+      font-size: 30px;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .service-widget {
+      position: absolute;
+      right: 24px;
+      top: 40%;
+
+      form {
+        padding: 32px;
+        margin-left: auto;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+        max-width: 400px;
+      }
+    }
+  }
+}
