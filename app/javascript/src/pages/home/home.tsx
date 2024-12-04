@@ -79,6 +79,7 @@ filterCards = (cards: cardType): void => {
           >
             <ImageCarousel
               cards={ carouselCards }
+              timer={ true }
             >
               
               <PhoneNumber />

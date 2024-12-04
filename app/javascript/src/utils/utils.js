@@ -35,3 +35,9 @@ export function sortByTags(services) {
   })
   return serviceList
 };
+
+export function retrieveImages(services, callback) {
+  const imageArray = [];
+  services.forEach(service => service.images.forEach(image => imageArray.push(image)));
+  callback(imageArray);
+}

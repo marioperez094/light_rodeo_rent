@@ -1,5 +1,5 @@
 //External Imports
-import React, { ReactNode } from "react";
+import React from "react";
 
 //Context
 import { useLanguage } from "@context/language";

@@ -2,3 +2,9 @@
 <%= stylesheet_packs_with_chunks_tag "service" %>
 
 <div id="params" data-params="<%= @data %>"></div>
+
+
+<% content_for :head do %>
+  <title><%="Service | Light Rodeo's Rent"%></title>
+  <meta name="description" content="Any service, any time. Rent our clean, safe, and fun services!"/>
+<% end %>
