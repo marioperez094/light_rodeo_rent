@@ -112,5 +112,13 @@ export const translationText: {
   language: {
     "english": "Language",
     "spanish": "Idioma"
+  },
+  contactFormWarning: {
+    "english": "Note: By submitting the contact form, you agree to be contacted via the provided email or phone number.",
+    "spanish": "Nota: Al enviar el formulario de contacto, aceptas ser contactado a través del correo electrónico o número de teléfono proporcionado.",
+  },
+  thankYou: {
+    "english": "Thank you! We received your message and will follow up shortly!",
+    "spanish": "¡Gracias! Recibimos tu mensaje y responderemos pronto.",
   }
 }

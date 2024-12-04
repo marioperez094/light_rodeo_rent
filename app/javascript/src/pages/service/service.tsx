@@ -77,7 +77,7 @@ class Service extends React.Component<AppProps, AppStates> {
         >
           <main
             id="main"
-            role="main"
+            role="Main"
           >
             <ImageCarousel
               image={ layoutImage }

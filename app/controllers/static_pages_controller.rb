@@ -17,6 +17,10 @@ class StaticPagesController < ApplicationController
     render 'contact'
   end
 
+  def success
+    render 'success'
+  end
+
   def admin
     admin_check
   end

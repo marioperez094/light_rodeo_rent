@@ -55,7 +55,7 @@ class Contact extends React.Component<AppProps, AppStates> {
         <HomeLayout>
           <main
             id="main"
-            role="main"
+            role="Main"
           >
             <ContactForm
               contact={ this.state.contact }

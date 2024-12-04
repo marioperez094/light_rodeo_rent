@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/service-type/:id' => 'static_pages#service_filter'
   get '/service/:id' => 'static_pages#service'
   get '/contact' => 'static_pages#contact'
+  get '/contact/success' => 'static_pages#success'
 
   #Admin pages
   get '/admin' => 'static_pages#admin'

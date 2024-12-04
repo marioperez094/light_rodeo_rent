@@ -24,7 +24,8 @@ export default function TagList({
 }) {
   const { language } = useLanguage();
 
-  if (!tag) return (
+  console.log(tag.services)
+  if (tag.services.length === 0) return (
     <HomeNoListings listing={ translationText.services[language] }/>
   )
 
