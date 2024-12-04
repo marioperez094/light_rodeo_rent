@@ -11,20 +11,22 @@ import NoResults from "@components/noResults/noResults";
 
 //Functions
 import { getRequest } from "@utils/fetchRequests";
+import { retrieveImages } from "@utils/utils";
 
 //Types
-import { tagType, languageType} from "@utils/types";
+import { tagType, languageType } from "@utils/types";
 
 //Stylesheets
 import "./serviceFilter.scss";
 
 type AppProps = {
   tag_id: number;
-  language: string;
+  language: undefined | string;
 };
 
 type AppStates = {
   tag: tagType;
+  layoutImage: string;
 };
 
 class ServiceFilter extends React.Component<AppProps, AppStates> {
@@ -33,6 +35,7 @@ class ServiceFilter extends React.Component<AppProps, AppStates> {
 
     this.state = {
       tag: {},
+      layoutImage: undefined,
     };
   };
 
@@ -43,33 +46,51 @@ class ServiceFilter extends React.Component<AppProps, AppStates> {
   fetchAPI = (): void => {
     getRequest(`/api/tags/${ this.props.tag_id }`, (response: any) => {
       this.setState({ tag: response.tag });
+      this.getImages(response.tag);
+      this.setTitle(response.tag);
     });
   };
 
+  getImages = (tag: tagType): void => {
+    if (!tag.services) return;
+    retrieveImages(tag.services, (response: any) => {
+
+      //Last image of services
+      const lastImage = response.length - 1;
+
+      if (response.length === 0) return;
+      this.setState({ layoutImage: response[lastImage].image_url })
+    });
+  };
+
+  setTitle = (tag: tagType) => {
+    document.title = `${ tag[`${ this.props.language }_name`] } | Light Rodeo's Rent`
+  };
+
   render() {
-    const { tag } = this.state;
+    const { tag, layoutImage } = this.state;
 
 
     if (!tag.services) return <NoResults />;
 
-    const layoutImages = tag.services[0].images[0].image_url;
+  
     const title: languageType = {
-      "english": `${ tag.english_name } ${ tag.inflatable && "Inflatables"} Rental`,
-      "spanish": `Renta de ${ tag.inflatable && "Inflables"} ${ tag.spanish_name }`,
+      "english": `${ tag.english_name } ${ tag.inflatable ? "Inflatables" : ""} Rental`,
+      "spanish": `Renta de ${ tag.inflatable ? "Inflables" : ""} ${ tag.spanish_name }`,
     } 
 
     return(
       <>
         <SkipContent link="#services" />
         <HomeLayout
-          layoutImage={ layoutImages } 
+          layoutImage={ layoutImage } 
         >
           <main
             id="main"
-            role="main"
+            role="Main"
           >
             <ImageCarousel
-              image={ layoutImages }
+              image={ layoutImage }
             >
               <HeroTitle 
                 title={ title[this.props.language] }

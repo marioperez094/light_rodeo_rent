@@ -10,7 +10,7 @@ export function ListBackground({
   children: ReactNode;
 }) {
   return(
-    <article
+    <section
       id="services"
       aria-label="Services"
     >
@@ -19,26 +19,26 @@ export function ListBackground({
           { children }
         </div>
       </div>
-    </article>
+    </section>
   )
 };
 
 export function ServiceBoxContainer({ children } : { children: ReactNode }) {
   return (
-    <div className="service-box col-12 col-md-6 col-lg-4 py-4 px-lg-5">
+    <article className="service-box col-12 col-md-6 col-lg-4 py-4 px-lg-5">
       <div className="service shadow-lg rounded p-2">
         { children }
       </div>
-    </div>
+    </article>
   )
 };
 
 export function TagBoxContainer({ children } : { children: ReactNode }) {
   return(
-    <div className="service-box col-12 col-lg-6 py-4 px-lg-5">
+    <article className="service-box col-12 col-lg-6 py-4 px-lg-5">
       <div className="service shadow-lg rounded p-2">
         { children }
       </div>
-    </div>
+    </article>
   )
 }

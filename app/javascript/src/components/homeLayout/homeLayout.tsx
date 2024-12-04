@@ -16,7 +16,7 @@ import { getRequest } from "@utils/fetchRequests";
 //Types
 import { tagType } from "@utils/types";
 
-import { logo, frontPageText, generalServices } from "@utils/constants";
+import { logo, translationText } from "@utils/constants";
 
 //Stylesheets
 import "./homeLayout.scss";
@@ -98,11 +98,12 @@ export default function HomeLayout({
                 <li className="nav-item d-none d-lg-block">
                   <h3 className="phone-number heading-text">
                     <span className="text-outline">
-                      { frontPageText.rentNow[language] }
+                      { translationText.rentNow[language] }
                     </span>
                     <a
                       className="btn btn-warning d-block"
                       tabIndex={ 0 }
+                      href="/contact"
                     >
                       (480) 658-7150
                     </a>
@@ -113,7 +114,7 @@ export default function HomeLayout({
               <ul className="navbar-nav ms-lg-auto me-auto ms-2 mb-2 mb-lg-0">
                 { serviceTags.length > 0 && 
                   <NavDropdown
-                    title={ frontPageText.inflatables[language] }
+                    title={ translationText.inflatables[language] }
                   >
                     { inflatableTags.map((inflatable) => 
                       <DropdownItem tag={ inflatable } key={ inflatable.id } />
@@ -128,9 +129,9 @@ export default function HomeLayout({
                 <li className="nav-item me-3">
                   <a
                     className="nav-link"
-                    href="#"
+                    href="/contact"
                   >
-                    { frontPageText.aboutUs[language] }
+                    { translationText.contactUs[language] }
                   </a>
                 </li>
                 <li className="nav-item dropdown me-3">
@@ -186,11 +187,11 @@ export default function HomeLayout({
           <div className="container-fluid">
             <div className="row">
               <FooterContent
-                title={ frontPageText.inflatables[language] }
+                title={ translationText.inflatables[language] }
                 tags={ inflatableTags }
               />
               <FooterContent
-                title={ generalServices.services[language] }
+                title={ translationText.services[language] }
                 tags={ serviceTags }
               />
               <hr className="d-xl-none" />
@@ -198,7 +199,7 @@ export default function HomeLayout({
                 <div className="row">
                   <div className="col-12 col-sm-4 col-xl-12">
                     <h6>
-                      <a href="#">{ frontPageText.aboutUs[language] }</a>
+                      <a href="/contact">{ translationText.contactUs[language] }</a>
                     </h6>
                   </div>
                 </div>

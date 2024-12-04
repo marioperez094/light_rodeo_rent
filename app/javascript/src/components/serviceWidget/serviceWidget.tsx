@@ -5,12 +5,12 @@ import React, { useEffect, useState } from "react";
 import { useLanguage } from "@context/language";
 
 //Types
-import { languageType, tagType } from "@utils/types";
+import { tagType } from "@utils/types";
 
 //Functions
 import { getRequest } from "@utils/fetchRequests";
 
-import { frontPageText } from "@utils/pageText";
+import { translationText } from "@utils/constants";
 
 export default function ServiceWidget() {
   const { language } = useLanguage();
@@ -33,7 +33,7 @@ export default function ServiceWidget() {
     >
       <form className="rounded p-4">
         <h3 className="text-center heading-text mb-3">
-          { frontPageText.chooseFun[language] }
+          { translationText.chooseFun[language] }
         </h3>
         <select
           className="form-select"
@@ -47,7 +47,7 @@ export default function ServiceWidget() {
               key={ tag.id }
               value={ tag.id }
             >
-              { tag[`${ language }_name`] }
+              { `${tag[`${ language }_name`]} ${ tag.inflatable ? translationText.inflatables[language] : "" }` }
             </option>
           )}
         </select>
@@ -57,7 +57,7 @@ export default function ServiceWidget() {
             className="btn btn-warning px-4 py-2 mt-4"
             href={ `/service-type/${ widget }` }
           >
-            { frontPageText.search[language] }
+            { translationText.search[language] }
           </a>
         </div>
       </form>

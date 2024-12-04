@@ -1,4 +1,5 @@
 //Types
+import { translationText } from "./constants";
 import { formFields } from "./types";
 
 export const loginFields: formFields[] = [{
@@ -43,3 +44,42 @@ export const tagFields: formFields[] = [{
   name: "english_name",
   label: "Categoria en Ingles",
 }]
+
+export const contactForm: formFields[] = [{
+  name: "Nombre",
+  label: translationText.firstName,
+}, {
+  name: "Apellido",
+  label: translationText.lastName,
+}, {
+  name: "Correo\u00A0Electrónico",
+  label: translationText.email,
+  type: "email",
+}, {
+  name: "Número\u00A0de\u00A0Teléfono",
+  label: translationText.phoneNumber,
+  type: "tel",
+}, { 
+  name: "Fecha\u00A0del\u00A0Evento",
+  label: translationText.date,
+  type: "date",
+  required:  false,
+}, {
+  name: `Hora\u00A0del\u00A0Evento`,
+  label: translationText.time,
+  type: "time",
+  required: false,
+}, {
+  name: "Idioma",
+  label: translationText.language,
+  disabled: true,
+}, {
+  name: "Servicio",
+  label: translationText.service,
+  required: false,
+}, {
+  name: "Mensaje",
+  label: translationText.message,
+  type: "textArea",
+  required: false,
+}];

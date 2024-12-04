@@ -8,7 +8,7 @@ import HomeNoListings from "@components/headers/homeNoListings";
 //Context
 import { useLanguage } from "@context/language";
 
-import { generalServices } from "@utils/constants";
+import { translationText } from "@utils/constants";
 
 //Stylesheets
 import "./noResults.scss";
@@ -17,10 +17,12 @@ import "./noResults.scss";
 export default function NoResults() {
   const { language } = useLanguage();
   return (
-    <HomeLayout>
-      <div className="spacer d-flex justify-content-center align-items-center" >
-        <HomeNoListings listing={ generalServices.services[language] } />
-      </div>
-    </HomeLayout>
+    <div id="noResult">
+      <HomeLayout>
+        <div className="spacer d-flex justify-content-center align-items-center" >
+          <HomeNoListings listing={translationText.services[language]} />
+        </div>
+      </HomeLayout>
+    </div>
   )
 };

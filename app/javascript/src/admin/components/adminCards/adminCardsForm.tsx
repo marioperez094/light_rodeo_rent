@@ -11,9 +11,10 @@ import AdminCardLoad from "./adminCardLoad";
 //Functions
 import { getRequest, postRequest } from "@utils/fetchRequests";
 import { handleErrors } from "@utils/fetchHelper";
+import { retrieveImages } from "@utils/utils";
 
 //Types
-import { cardType, serviceType } from "@utils/types";
+import { cardType } from "@utils/types";
 
 type AppProps = {
   cardType: string;
@@ -172,15 +173,11 @@ function ServiceImages({
 
   function fetchServices() {
     getRequest("/api/services", (response: any) => {
-      retrieveImages(response.services)
+      retrieveImages(response.services, (response: any) => {
+        setImages(response);
+      })
     });
   };
-
-  function retrieveImages(services: serviceType[]) {
-    const imageArray = [];
-    services.forEach(service => service.images.forEach(image => imageArray.push(image)));
-    setImages(imageArray);
-  }
 
   if (images.length === 0) return <NoListings listing="de servicios" />
 

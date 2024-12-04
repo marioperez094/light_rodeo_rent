@@ -4,7 +4,10 @@ import React from "react";
 //Context
 import { useLanguage } from "@context/language";
 
-import { frontPageText } from "@utils/pageText";
+import { translationText } from "@utils/constants";
+
+//Stylesheets
+import "./heroComponents.scss";
 
 export function PhoneNumber() {
   const { language } = useLanguage();
@@ -13,11 +16,11 @@ export function PhoneNumber() {
     <div className="phone-number-container d-lg-none">
       <h3 className="phone-number heading-text text-end">
         <span className="text-outline">
-          { frontPageText.rentNow[language] }
+          { translationText.rentNow[language] }
         </span>
         <a
           className="btn btn-warning d-block"
-          href="#"
+          href="/contact"
         >
           (480) 658-7150
         </a>
@@ -32,7 +35,7 @@ export function Slogan() {
   return (
     <div className="slogan-container d-none d-lg-block">
       <h3 className="slogan heading-text text-outline text-center">
-        { frontPageText.slogan[language] }
+        { translationText.slogan[language] }
       </h3>
     </div>
   )

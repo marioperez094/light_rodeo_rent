@@ -1,0 +1,15 @@
+@import "@stylesheets/variables.scss";
+
+#contact {
+    #homeNavbar {
+      position: static;
+    }
+
+    .contact-widget {
+      background-color: $thirtiary-color;
+    }
+
+    .form {
+      background-color: white;
+    }
+}

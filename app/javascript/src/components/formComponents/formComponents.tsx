@@ -9,6 +9,7 @@ export function LabeledInput({
   required = true,
   autoComplete = "OFF",
   wordCount = false,
+  disabled = false,
   handleChange,
 }: {
   name: string;
@@ -18,6 +19,7 @@ export function LabeledInput({
   required: boolean;
   autoComplete?: string;
   wordCount?: boolean;
+  disabled?: boolean;
   handleChange: ChangeEventHandler<HTMLInputElement>;
 }) {
   return(
@@ -37,6 +39,7 @@ export function LabeledInput({
         autoComplete={ autoComplete }
         onChange={ handleChange }
         required={ required }
+        disabled={ disabled }
       />
       { wordCount && 
         <WordCount
@@ -54,12 +57,14 @@ export function LabeledTextArea({
   label,
   value, 
   required = true,
+  wordCount = true,
   handleChange,
 }: {
   name: string;
   label: string;
   value: string;
   required: boolean;
+  wordCount?: boolean;
   handleChange: ChangeEventHandler<HTMLInputElement>;
 }) {
   return(
@@ -80,11 +85,13 @@ export function LabeledTextArea({
         onChange={ handleChange }
         required={ required }
       />
-      <WordCount
-        minCharacters={ 10 }
-        maxCharacters={ 500 }
-        message={ value } 
-      />
+      {wordCount &&
+        <WordCount
+          minCharacters={ 10 }
+          maxCharacters={ 500 }
+          message={ value } 
+        />
+      }
     </div>
   )
 };
