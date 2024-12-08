@@ -25,7 +25,7 @@ export default function DropdownItem(
           src={ tag.image_url }
           alt={ tag[`${ language }_name`] }
           aria-hidden
-          className="nav-dropdown-image tw-rounded-md d-block"
+          className="nav-dropdown-image tw-rounded-md d-none d-lg-block"
           loading="lazy"
         />
         { /*<div
