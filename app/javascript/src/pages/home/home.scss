@@ -2,17 +2,24 @@
 
 #home {
   .slogan-container {
-    background-color: $primary-color;
+    background-color: $transparent-color;
     position: absolute;
     right: 0;
     left: 0;
     bottom: 0;
+    h1 {
+      font-size: 35px;
+    }
   }
 
   .service-widget {
     form {
-      background-color: white;
+      background-color: $solid-light-color;
       font-weight: 500;
+    }
+
+    h2 {
+      font-size: 30px;
     }
   }
 
@@ -27,6 +34,12 @@
     }
   }
 
+  .service {
+    h2 {
+      font-size: 27px;
+    }
+  }
+
   @media (max-width: 991.9px) {
     .phone-number-container {
       position: absolute;
@@ -35,7 +48,13 @@
     }
 
     .phone-number {
-      font-size: 30px;
+      span {
+        font-size: 30px;
+      };
+
+      a {
+        font-size: 20px;
+      };
     }
   }
 
@@ -50,6 +69,7 @@
         margin-left: auto;
         box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
         max-width: 400px;
+        border-radius: 10px;
       }
     }
   }

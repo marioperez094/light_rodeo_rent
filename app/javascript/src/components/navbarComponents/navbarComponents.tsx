@@ -102,9 +102,7 @@ export function NavDropdown(
         className="dropdown-menu dropdown-menu-expanded"
         aria-labelledby={`${ title }Dropdown`}
       >
-        <div className="dropdown-menu-container ms-auto me-auto">
-          { children }
-        </div>
+        { children }
       </ul>
     </li>
   )

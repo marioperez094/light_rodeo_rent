@@ -120,5 +120,7 @@ export const translationText: {
   thankYou: {
     "english": "Thank you! We received your message and will follow up shortly!",
     "spanish": "¡Gracias! Recibimos tu mensaje y responderemos pronto.",
-  }
-}
+  },
+};
+
+export const phoneNumber: string = "(480) 658-7150"

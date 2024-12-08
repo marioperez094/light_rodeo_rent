@@ -1,5 +1,5 @@
 //External Imports
-import React from "react";
+import React, { useMemo } from "react";
 
 //Components
 import { ListBackground } from "@components/serviceList/ListBackground";
@@ -21,8 +21,16 @@ export default function ServiceWidget({
   images: [];
 }) {
   const { language } = useLanguage();
-  const imageCards = getImageCards(service, images);
-  const tags = service.tags ? service.tags.map(tag => tag.tag[`${ language }_name`]) : null;
+  const imageCards = useMemo(() => getImageCards(service, images), [service, images]);
+  const tags = useMemo(() => setServiceTags(), [service]);
+
+  function setServiceTags() {
+    if (service.tags) {
+      return service.tags.map(tag => tag.tag[`${ language }_name`]) 
+    } 
+    return null; 
+  };
+
 
   function saveToLocal() {
     localStorage.setItem("serviceRental", JSON.stringify(service))
@@ -42,7 +50,7 @@ export default function ServiceWidget({
               </ImageCarousel>
             </div>
             <div className="col-12 col-lg-6 px-4 pt-2 service-description">
-              <h1 className="heading-text text-center mx-3">{ service[`${ language }_name`] }</h1>
+              <h2 className="heading-text text-outline text-center mx-3">{ service[`${ language }_name`] }</h2>
               <hr />
               { service.dimensions &&
                 <p><strong>{ translationText.dimensions[language] }</strong>: { service.dimensions }</p> 

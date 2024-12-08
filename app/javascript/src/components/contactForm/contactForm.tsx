@@ -11,8 +11,8 @@ import { useLanguage } from "@context/language";
 import { formFields } from "@utils/types";
 
 import { translationText } from "@utils/constants";
-
 import { contactForm } from "@utils/formFields";
+import { phoneNumber } from "@utils/constants";
 
 
 export default function ContactForm({ 
@@ -24,6 +24,7 @@ export default function ContactForm({
 }) {
   const { language } = useLanguage();
   const email = process.env.EMAIL_LINK;
+  const { contactUs, contactFormWarning, submit } = translationText;
   
   return(
     <section
@@ -34,8 +35,8 @@ export default function ContactForm({
         <div className="row pt-2">
           <form className="contact-form col-12 py-4 px-lg-5" action={ `https://formsubmit.co/${ email }` } method="POST">
             <div className="form shadow-lg rounded p-5">
-              <h3 className="heading-text text-center">{ translationText.contactUs[language] }</h3>
-              <h4 className="heading-text text-center">(480) 658-7150</h4>
+              <h3 className="heading-text text-outline text-center">{ contactUs[language] }</h3>
+              <h4 className="heading-text text-outline text-center">{ phoneNumber }</h4>
               <div className="row">
 
                 {/* Honeypot */}
@@ -47,14 +48,17 @@ export default function ContactForm({
                 <input type="hidden" name="_next" value="http://localhost:3000/contact/success" />
 
                 { contactForm.map((field: formFields, index: number) => {
-                  if (field.type === "textArea") return (
+                  const isTextArea = field.type === "textArea";
+                  const { name, label, type, disabled, required } = field;
+
+                  if (isTextArea) return (
                     <div className="col-12" key={ index }>
                         <LabeledTextArea
-                          name={ field.name }
-                          label={ field.label[language] }
-                          value={ contact[field.name] }
+                          name={ name }
+                          label={ label[language] }
+                          value={ contact[name] }
                           wordCount={ false }
-                          required={ field.required }
+                          required={ required }
                           handleChange={ setContact }
 
                         />
@@ -64,19 +68,19 @@ export default function ContactForm({
                   return (
                     <div className="col-12 col-md-6" key={ index }>
                       <LabeledInput
-                        name={ field.name }
-                        label={ field.label[language] }
-                        type={ field.type }
-                        value={ contact[field.name] }
-                        disabled={ field.disabled }
-                        required={ field.required }
+                        name={ name }
+                        label={ label[language] }
+                        type={ type }
+                        value={ contact[name] }
+                        disabled={ disabled }
+                        required={ required }
                         handleChange={ setContact }
                       />
                     </div>
                   )
                 })}
                 <div className="col-12">
-                  <p className="text-danger">{ translationText.contactFormWarning[language] }</p>
+                  <p className="text-danger">{ contactFormWarning[language] }</p>
                 </div>
                 <div className="col-12 col-md-2 offset-md-10">
                   <button
@@ -84,7 +88,7 @@ export default function ContactForm({
                     type="submit"
                     //href={ personal ? emailTo + contact.message : emailTo + mailTo.spanish }
                   >
-                    { translationText.submit[language] }
+                    { submit[language] }
                   </button>
                 </div>
               </div>

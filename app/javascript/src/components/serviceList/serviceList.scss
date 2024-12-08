@@ -1,12 +1,12 @@
 @import "@stylesheets/variables.scss";
 
 .service-list {
-  background-color: $thirtiary-color;
+  background-color: $solid-dark-color;
 }
 
 .service {
   transition: outline 100ms ease-in-out;
-  background-color: white;
+  background-color: $solid-light-color;
   
   a {
     text-decoration: none;

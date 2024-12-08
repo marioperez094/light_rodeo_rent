@@ -20,6 +20,7 @@ import { cardType } from "@utils/types";
 
 //Stylesheets
 import "./home.scss";
+import LazyLoadWrapper from "../../components/lazyLoaderWrapper/lazyLoadWrapper";
 
 type AppProps = {
 };
@@ -84,15 +85,20 @@ filterCards = (cards: cardType): void => {
               
               <PhoneNumber />
               
-              <Slogan />
+              
+              <div className="slogan-container d-none d-lg-block">
+                <Slogan />
+              </div>
             
             </ImageCarousel>
             
             <ServiceWidget />
             
-            <ServiceList
-              cards={ serviceCards }
-            />
+            <LazyLoadWrapper id="service-list">
+              <ServiceList
+                cards={ serviceCards }
+              />
+            </LazyLoadWrapper>
           
           </main>
         </HomeLayout>
