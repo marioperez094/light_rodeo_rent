@@ -28,13 +28,13 @@ export default function ServiceWidget() {
 
   return(
     <section
-      className="container-fluid service-widget"
+      className="container-fluid service-widget p-0"
       aria-label="Service Widget"
     >
-      <form className="rounded p-4">
-        <h3 className="text-center heading-text mb-3">
+      <form className="p-4">
+        <h2 className="text-center heading-text text-outline mb-3">
           { translationText.chooseFun[language] }
-        </h3>
+        </h2>
         <select
           className="form-select"
           aria-label="Choose an Attraction"

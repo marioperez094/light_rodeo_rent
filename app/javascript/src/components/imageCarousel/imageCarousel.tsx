@@ -15,6 +15,7 @@ import "./imageCarousel.scss";
 
 import { logo } from "@utils/constants";
 import CarouselDots from "./carouselDots";
+import CarouselButtons from "./carouselButtons";
 
 
 export default function ImageCarousel({ 
@@ -48,12 +49,18 @@ export default function ImageCarousel({
   }, [cards, cardIndex]);
 
   function showNextImage() {
-    if (cardIndex > cards.length - 2) return setCardIndex(0);
+    const cardIndexOutOfRange = cardIndex > cards.length - 2;
+
+    if (cardIndexOutOfRange) return setCardIndex(0);
     return setCardIndex(prevState => prevState + 1);
   };
 
-  function setImageIndex(index) {
-    return setCardIndex(index);
+  function showPrevImage() {
+    const cardIndexOutOfRange = cardIndex === 0;
+    const cardsCount = cards.length - 1
+
+    if (cardIndexOutOfRange) return setCardIndex(cards.length - 1)
+    return setCardIndex(prevState => prevState - 1);
   }
 
   if (cards.length === 0) return (
@@ -61,6 +68,7 @@ export default function ImageCarousel({
       <div className="carousel d-flex justify-content-center">
         <img
           src={ image }
+          alt="Unable to load, default image"
           className="img-slider d-block"
         />
         { children }
@@ -84,11 +92,18 @@ export default function ImageCarousel({
           )
         })}
         { imageUX && 
+          <>
           <CarouselDots
             images={ cards }
             imageIndex={ cardIndex }
             setImageIndex={ setCardIndex }
           />
+          <CarouselButtons
+            images={ cards }
+            showPrevImage={ showPrevImage }
+            showNextImage={ showNextImage }
+          />
+          </>
         }
         { children }
       </div>

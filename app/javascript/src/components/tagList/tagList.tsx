@@ -23,9 +23,9 @@ export default function TagList({
   tag: tagType
 }) {
   const { language } = useLanguage();
+  const hasNoServices = tag.services.length === 0;
 
-  console.log(tag.services)
-  if (tag.services.length === 0) return (
+  if (hasNoServices) return (
     <HomeNoListings listing={ translationText.services[language] }/>
   )
 

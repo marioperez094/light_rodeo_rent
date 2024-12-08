@@ -1,11 +1,12 @@
 //External Imports
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { lazy, ReactNode, Suspense, useEffect, useMemo, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 
 //Components
 import { ExpandableButton, ExpandableMenu, NavDropdown } from "@components/navbarComponents/navbarComponents";
 import FooterContent from "./footerContent";
+import LazyLoadWrapper from "@components/lazyLoaderWrapper/lazyLoadWrapper";
 
 //Context
 import { useLanguage } from "@context/language";
@@ -16,10 +17,12 @@ import { getRequest } from "@utils/fetchRequests";
 //Types
 import { tagType } from "@utils/types";
 
-import { logo, translationText } from "@utils/constants";
-
 //Stylesheets
 import "./homeLayout.scss";
+
+import { logo, translationText, phoneNumber } from "@utils/constants";
+
+const DropdownItem = lazy(() => import("./dropDownItem"));
 
 export default function HomeLayout({ 
   children,
@@ -29,26 +32,30 @@ export default function HomeLayout({
   layoutImage: string;
 }) {
   const { language, setLanguage } = useLanguage();
-  const [inflatableTags, setInflatableTags] = useState([]);
-  const [serviceTags, setServiceTags] = useState([]);
+  const [tags, setTags] = useState([]);
+  const { rentNow, inflatables, contactUs, services } = translationText;
+  const filteretedTags = useMemo(() => filterTags(tags), [tags])
 
   useEffect(() => {
     getRequest("/api/tags_with_image", (response: any) => {
-      filterTags(response.tags);
+      setTags(response.tags)
     })
   }, []);
 
   function filterTags(tags: tagType[]) {
-    const inflatableTags = [];
-    const serviceTags = [];
+    const tagObj = {
+      inflatables: [],
+      services: [],
+    };
     
     tags.forEach((tag: tagType) => {
-      if (tag.inflatable) return inflatableTags.push(tag);
-      if (tag.english_name !== "Inflatables") return serviceTags.push(tag);
+      const doesNotMatchTag = tag.english_name !== "Inflatables";
+
+      if (tag.inflatable) return tagObj.inflatables.push(tag);
+      if (doesNotMatchTag) return tagObj.services.push(tag);
     });
 
-    setInflatableTags(inflatableTags);
-    setServiceTags(serviceTags);
+    return tagObj;
   };
 
   return (
@@ -71,6 +78,7 @@ export default function HomeLayout({
           >
             <img
               src={ logo }
+              className="logo"
               aria-hidden
             />
             <span className="heading-text text-outline ms-2">
@@ -86,6 +94,7 @@ export default function HomeLayout({
             >
               <img
                 src={ logo }
+                className="logo"
                 aria-hidden
               />
               <span className="heading-text text-outline ms-2">
@@ -96,32 +105,36 @@ export default function HomeLayout({
             <ExpandableMenu>
               <ul className="navbar-nav ms-lg-0 ms-2 mb-2 mb-lg-0">
                 <li className="nav-item d-none d-lg-block">
-                  <h3 className="phone-number heading-text">
+                  <h3 className="phone-number heading-text text-outline">
                     <span className="text-outline">
-                      { translationText.rentNow[language] }
+                      { rentNow[language] }
                     </span>
                     <a
                       className="btn btn-warning d-block"
                       tabIndex={ 0 }
                       href="/contact"
                     >
-                      (480) 658-7150
+                      { phoneNumber }
                     </a>
                   </h3>
                 </li>
               </ul>
 
               <ul className="navbar-nav ms-lg-auto me-auto ms-2 mb-2 mb-lg-0">
-                { serviceTags.length > 0 && 
+                { filteretedTags.services.length > 0 && 
                   <NavDropdown
-                    title={ translationText.inflatables[language] }
+                    title={ inflatables[language] }
                   >
-                    { inflatableTags.map((inflatable) => 
-                      <DropdownItem tag={ inflatable } key={ inflatable.id } />
-                    )}
+                    <LazyLoadWrapper id="lazy-dropdown">
+                      <div className="dropdown-menu-container ms-auto me-auto">
+                        { filteretedTags.inflatables.map((inflatable) => 
+                          <DropdownItem tag={ inflatable } key={ inflatable.id } />
+                        )}
+                      </div>
+                    </LazyLoadWrapper>
                   </NavDropdown>
                 }
-                <DynamicTags tags={ serviceTags } />
+                <DynamicTags tags={ filteretedTags.services } />
               </ul>
 
               <ul className="navbar-nav ms-lg-0 ms-2 mb-2">
@@ -131,7 +144,7 @@ export default function HomeLayout({
                     className="nav-link"
                     href="/contact"
                   >
-                    { translationText.contactUs[language] }
+                    { contactUs[language] }
                   </a>
                 </li>
                 <li className="nav-item dropdown me-3">
@@ -143,7 +156,7 @@ export default function HomeLayout({
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    {language === "english" ? "English" : "Español" }
+                    { language === "english" ? "English" : "Español" }
                   </a>
                   <ul 
                     className="dropdown-menu language-dropdown"
@@ -187,19 +200,19 @@ export default function HomeLayout({
           <div className="container-fluid">
             <div className="row">
               <FooterContent
-                title={ translationText.inflatables[language] }
-                tags={ inflatableTags }
+                title={ inflatables[language] }
+                tags={ filteretedTags.inflatables }
               />
               <FooterContent
-                title={ translationText.services[language] }
-                tags={ serviceTags }
+                title={ services[language] }
+                tags={ filteretedTags.services }
               />
               <hr className="d-xl-none" />
               <div className="col-12 col-xl-4">
                 <div className="row">
                   <div className="col-12 col-sm-4 col-xl-12">
                     <h6>
-                      <a href="/contact">{ translationText.contactUs[language] }</a>
+                      <a href="/contact">{ contactUs[language] }</a>
                     </h6>
                   </div>
                 </div>
@@ -207,11 +220,15 @@ export default function HomeLayout({
                   <hr className="mt-3" />
                   <div className="col-12 col-xl-6 order-xl-2">
                     <h6 className="contacts d-sm-inline">{}</h6>
-                    <p className="d-sm-inline">(480) 658-7150 | <a 
+                    <p className="d-sm-inline">{ phoneNumber } | <a 
                         href="https://www.facebook.com/martina0771"
+                        aria-label="Light Rodeo's Rent Facebook Page"
                         target="_blank"
                       >
-                        <FontAwesomeIcon icon={ faFacebook } />
+                        <FontAwesomeIcon 
+                          icon={ faFacebook }
+                          aria-hidden 
+                        />
                       </a>
                     </p>
                   </div>
@@ -233,13 +250,15 @@ export default function HomeLayout({
 
 function DynamicTags({ tags } : { tags: tagType }) {
   const { language } = useLanguage();
+  const noTags = tags.length === 0;
 
-  if (tags.length === 0) return;
+  if (noTags) return;
 
   return (
     <>
       { tags.map((tag: tagType, index: number) => {
-        if (index > 2) return;
+        const tagsExceedTwo = index > 2;
+        if (tagsExceedTwo) return;
 
         return(
           <li 
@@ -256,30 +275,5 @@ function DynamicTags({ tags } : { tags: tagType }) {
         )
       })}
     </>
-  )
-}
-
-function DropdownItem(
-  { 
-    tag
-  }: {
-    tag: tagType;
-  }) {
-  const { language } = useLanguage();
-
-  return (
-    <li className="px-3">
-      <a
-        className="dropdown-item"
-        href={`/service-type/${ tag.id }`}
-      >
-        <div
-          className="nav-dropdown-image tw-rounded-md"
-          style={{ backgroundImage: `url(${ tag.image_url })` }}
-          aria-hidden
-        />
-        { tag[`${ language }_name`] }
-      </a>
-    </li>
   )
 };

@@ -18,6 +18,7 @@ import { tagType, languageType } from "@utils/types";
 
 //Stylesheets
 import "./serviceFilter.scss";
+import LazyLoadWrapper from "../../components/lazyLoaderWrapper/lazyLoadWrapper";
 
 type AppProps = {
   tag_id: number;
@@ -97,7 +98,9 @@ class ServiceFilter extends React.Component<AppProps, AppStates> {
               />
             </ImageCarousel>
 
-            <TagList tag={ tag } />
+            <LazyLoadWrapper id="tag-list">
+              <TagList tag={ tag } />
+            </LazyLoadWrapper>
           </main>
 
         </HomeLayout>

@@ -6,6 +6,7 @@ export default function ImageContainer({ children } : { children: ReactNode }) {
     <section
       aria-label="Inflatables Carousel Image Library"
       className="container-fluid carousel-container"
+      id="image-carousel"
     >
       <div className="row gx-0">
         <div className="col-12">

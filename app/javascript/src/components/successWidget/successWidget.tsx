@@ -29,7 +29,7 @@ export default function SuccessWidget() {
         className="success-widget shadow-lg rounded p-5"
       >
         <CheckMark />
-        <h3 className="text-center">{ translationText.thankYou[language] }</h3>
+        <h1 className="text-center">{ translationText.thankYou[language] }</h1>
       </div>
     </div>
   )

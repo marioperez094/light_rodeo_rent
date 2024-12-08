@@ -21,6 +21,8 @@ export default function CarouselDots(
     imageIndex: number
     setImageIndex: (index: number) => void
   }) {
+
+  if (images.length < 2) return;
   return (
     <div className="dots-container d-flex justify-content-center w-100">
       { images.map((_, index) => {

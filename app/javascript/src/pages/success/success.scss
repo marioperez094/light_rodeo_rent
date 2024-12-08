@@ -5,8 +5,12 @@
     position: static;
   }
 
+  h1 {
+    font-size: 30px;
+  }
+
   .success-widget {
-    background-color: white;
+    background-color: $solid-light-color
   }
 
   .checkmark-circle {

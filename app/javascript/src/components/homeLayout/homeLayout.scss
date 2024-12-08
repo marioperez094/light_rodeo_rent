@@ -1,7 +1,7 @@
 @import "@stylesheets/variables.scss";
 
 #homeNavbar {
-  background-color: $primary-color;
+  background-color: $transparent-color;
   position: absolute;
   width: 100%;
   z-index: 1;
@@ -16,14 +16,14 @@
     font-size: 15px;
   }
 
-  img {
+  .logo {
     display: inline-block;
     height: 50px;
   }
 
   .nav-link,
   .dropdown-item {
-    color: white !important;
+    color: $nav-text !important;
   }
 
   .dropdown-menu {
@@ -62,7 +62,7 @@
 
   @media (max-width: 991.9px) {
     .navbar-toggler {
-      color: white;
+      color: $nav-text;
       transition: scale 100ms ease-in-out, color 500ms ease-in-out;
 
       &:hover,
@@ -74,7 +74,7 @@
     }
 
     hr {
-      border-top: solid white 2px;
+      border-top: solid $solid-light-color 2px;
     }
   }
 
@@ -98,7 +98,7 @@
     }
 
     .dropdown-menu {
-      background-color: $primary-color;
+      background-color: $transparent-color;
       max-height: 200px;
       
     }
@@ -116,34 +116,48 @@
 
     .dropdown-menu-container {
       white-space: nowrap;
-      max-width: 90%;
+      max-width: 70%;
       overflow-x: scroll;
 
       > li {
         display: inline-block;
       }
 
+      /* width */
       &::-webkit-scrollbar {
-        display: none;
+        margin-top: 10px;
+        width: 7px;
+        height: 7px;
       }
 
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+      /* Track */
+      &::-webkit-scrollbar-track {
+        background: $solid-dark-color;
+        border-radius: 10px;
+      }
+    
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: $solid-light-color;
+        border-radius: 10px;
+      }
+    
+      /* Handle on hover */
+      /*&::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }*/
     }
 
     .nav-dropdown-image {
       width: 200px;
-      padding-top: calc(2 / 3 * 100%);
-      background-size: cover !important;
-      background-position: center !important;
-      background-repeat: no-repeat;
+      aspect-ratio: 3 / 2;
     }
   }
 }
 
 
 #homeFooter {
-  background-color: $primary-color;
+  background-color: $transparent-color;
   padding: 20px 24px 15px;
 
   .container-fluid {
@@ -151,7 +165,7 @@
   }
 
   hr {
-    color: white;
+    color: $nav-text;
   }
 
   .service-list:first-child {
@@ -160,16 +174,20 @@
   }
 
   h6, p, small {
-    color: white;
+    color: $nav-text
   }
 
   a {
     font-size: 15px;
-    color: white;
+    color: $nav-text;
     text-decoration: none;
 
     &:hover {
       text-decoration: underline;
     }
+  }
+  
+  .language-dropdown {
+    max-width: 10px;
   }
 }

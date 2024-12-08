@@ -23,7 +23,7 @@ export default function TagBox({ service } : { service: serviceType }) {
         style={{ backgroundImage: `url(${ image })` }}
       />
       <header>
-        <h4 className="heading-text text-center mx-3">{ service[`${ language }_name`] }</h4>
+        <h2 className="heading-text text-outline text-center mx-3">{ service[`${ language }_name`] }</h2>
       </header>
       <hr />
       <p className="description-box mx-2">

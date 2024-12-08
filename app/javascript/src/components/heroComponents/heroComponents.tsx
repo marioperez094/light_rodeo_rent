@@ -9,12 +9,14 @@ import { translationText } from "@utils/constants";
 //Stylesheets
 import "./heroComponents.scss";
 
+import { phoneNumber } from "@utils/constants";
+
 export function PhoneNumber() {
   const { language } = useLanguage();
   
   return (
     <div className="phone-number-container d-lg-none">
-      <h3 className="phone-number heading-text text-end">
+      <div className="phone-number heading-text text-outline text-end">
         <span className="text-outline">
           { translationText.rentNow[language] }
         </span>
@@ -22,9 +24,9 @@ export function PhoneNumber() {
           className="btn btn-warning d-block"
           href="/contact"
         >
-          (480) 658-7150
+          { phoneNumber }
         </a>
-      </h3>
+      </div>
     </div>
   )
 };
@@ -33,11 +35,9 @@ export function Slogan() {
   const { language } = useLanguage();
 
   return (
-    <div className="slogan-container d-none d-lg-block">
-      <h3 className="slogan heading-text text-outline text-center">
-        { translationText.slogan[language] }
-      </h3>
-    </div>
+    <h1 className="slogan heading-text text-outline text-center">
+      { translationText.slogan[language] }
+    </h1>
   )
 };
 
@@ -46,8 +46,6 @@ export function HeroTitle({
 } : { 
   title: string;
 }) {
-  const { language } = useLanguage();
-  
 
   return (
     <div className="hero-title-container rounded">

@@ -2,17 +2,21 @@
 
 @import "@stylesheets/variables.scss";
 
+body { 
+  overflow-x: hidden;
+}
+
 .container-fluid {
   max-width: 1920px;
 }
 
 .heading-text {
-  color: black;
+  color: $heading-text;
   font-family: $brand-font;
 }
 
 .text-outline {
-  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+  text-shadow: -0.5px -0.5px 0 $outline-color, 0.5px -0.5px 0 $outline-color, -0.5px 0.5px 0 $outline-color, 0.5px 0.5px 0 $outline-color;
 }
 
 .aspect-ratio {
@@ -21,19 +25,30 @@
   background-position: center;
 }
 
+.aspect-ratio-image {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+}
+
 .layout-image {
   background-size: cover;
   background-position: 50% 70%;
   background-repeat: no-repeat;
 }
 
-nav {
-  position: absolute;
-  width: 100%;
-  z-index: 1;
-}
-
 .carousel-container {
   padding: 0 0;
   z-index: 0;
+}
+
+.btn-warning {
+  background-color: $button-color !important;
+  border: transparent;
+  color: $button-text-color !important;
+  
+  &:hover,
+  &:focus {
+    background-color: $button-hover-color !important;
+    color: $button-text-hover-color !important;
+  }
 }

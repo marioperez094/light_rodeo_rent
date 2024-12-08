@@ -22,19 +22,22 @@ export default function ServiceBox({
         style={{ backgroundImage: `url(${ image })` }}
       />
       <header>
-        <h4 className="heading-text text-center">Nombre</h4>
+        <h2 className="heading-text text-outline text-center">Nombre</h2>
       </header>
     </>
   )
 
   return (
     <a href={ `/service-type/${ card.tag.tag_id }` }>
-      <div
-        className="aspect-ratio rounded service-image mt-1"
-        style={{ backgroundImage: `url(${ card.image_url })` }}
+      <img
+        src={ card.image_url }
+        alt={ card.tag[`${ language }_name`] }
+        aria-hidden
+        className="aspect-ratio-image rounded service-image mt-1"
+        loading="lazy"
       />
       <header>
-        <h4 className="heading-text text-center">{ card.tag[`${ language }_name`] }</h4>
+        <h2 className="heading-text text-outline text-center">{ card.tag[`${ language }_name`] }</h2>
       </header>
     </a>
   )
