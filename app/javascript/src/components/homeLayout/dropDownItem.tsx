@@ -22,17 +22,11 @@ export default function DropdownItem(
         href={`/service-type/${ tag.id }`}
       >
         <img
-          src={ tag.image_url }
-          alt={ tag[`${ language }_name`] }
           aria-hidden
           className="nav-dropdown-image tw-rounded-md d-none d-lg-block"
+          style={{ backgroundImage: `url(${ tag.image_url })` }}
           loading="lazy"
         />
-        { /*<div
-          className="nav-dropdown-image tw-rounded-md"
-          style={{ backgroundImage: `url(${ tag.image_url })` }}
-          aria-hidden
-        /> */ }
         { tag[`${ language }_name`] }
       </a>
     </li>

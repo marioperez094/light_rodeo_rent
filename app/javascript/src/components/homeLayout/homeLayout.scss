@@ -151,6 +151,10 @@
     .nav-dropdown-image {
       width: 200px;
       aspect-ratio: 3 / 2;
+      padding-top: calc(2 / 3 * 100%);
+      background-size: cover !important;
+      background-position: center !important;
+      background-repeat: no-repeat;
     }
   }
 }

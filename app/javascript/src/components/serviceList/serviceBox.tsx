@@ -30,10 +30,9 @@ export default function ServiceBox({
   return (
     <a href={ `/service-type/${ card.tag.tag_id }` }>
       <img
-        src={ card.image_url }
-        alt={ card.tag[`${ language }_name`] }
-        aria-hidden
         className="aspect-ratio-image rounded service-image mt-1"
+        style={{ backgroundImage: `url(${ card.image_url })` }}
+        aria-hidden
         loading="lazy"
       />
       <header>

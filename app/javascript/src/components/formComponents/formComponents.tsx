@@ -28,7 +28,7 @@ export function LabeledInput({
         htmlFor={ name }
         className="form-label"
       >
-        { label }
+        { label }{ required && <span className="text-danger">*</span>}
       </label>
       <input
         type={ type }

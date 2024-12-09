@@ -28,6 +28,8 @@ body {
 .aspect-ratio-image {
   width: 100%;
   aspect-ratio: 3 / 2;
+  background-size: cover;
+  background-position: center;
 }
 
 .layout-image {
