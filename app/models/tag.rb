@@ -1,5 +1,5 @@
 class Tag < ApplicationRecord
-  has_many :taggables
+  has_many :taggables, dependent: :destroy
   has_many :services, through: :taggables, dependent: :destroy
   has_one :card, dependent: :destroy
 

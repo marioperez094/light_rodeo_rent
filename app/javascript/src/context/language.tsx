@@ -3,13 +3,13 @@ import React, { useState, useContext, createContext, ReactNode } from "react";
 
 type LanguageContextType = null | "spanish" | "english";
 
-const LanguageContext = createContext<LanguageContextType>("english");
+const LanguageContext = createContext<LanguageContextType>("spanish");
 const local: string = localStorage.getItem("languagePreference")
 
 function LanguageProvider (
   { children } : { children: ReactNode }
 ) {
-  const [language, changeLanguage] = useState<LanguageContextType>(local ? local : "english");
+  const [language, changeLanguage] = useState<LanguageContextType>(local ? local : "spanish");
 
   function setLanguage(language: LanguageContextType) {
     localStorage.setItem("languagePreference", language); 

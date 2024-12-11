@@ -31,7 +31,7 @@ export const translationText: {
   }, 
   contactUs: {
     "english": "Contact us!",
-    "spanish": "Contacta con nosotras!"
+    "spanish": "Contacta con nosotros!"
   },
   services: {
     "english": "Services",

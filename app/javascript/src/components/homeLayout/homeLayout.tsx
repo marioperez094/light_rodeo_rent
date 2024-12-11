@@ -221,7 +221,7 @@ export default function HomeLayout({
                   <div className="col-12 col-xl-6 order-xl-2">
                     <h6 className="contacts d-sm-inline">{}</h6>
                     <p className="d-sm-inline">{ phoneNumber } | <a 
-                        href="https://www.facebook.com/martina0771"
+                        href="https://www.facebook.com/mapleenterprises"
                         aria-label="Light Rodeo's Rent Facebook Page"
                         target="_blank"
                       >
