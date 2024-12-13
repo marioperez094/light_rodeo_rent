@@ -1,7 +1,7 @@
 class Service < ApplicationRecord
   belongs_to :user
   has_many :taggables, dependent: :destroy
-  has_many :tags, through: :taggables, dependent: :destroy
+  has_many :tags, through: :taggables
   has_many_attached :images
   
   validates :english_name, presence: true, length: { minimum: 3, maximum: 30 }

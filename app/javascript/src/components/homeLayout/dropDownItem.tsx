@@ -16,7 +16,7 @@ export default function DropdownItem(
   const { language } = useLanguage();
 
   return (
-    <li className="px-3">
+    <li className="px-3 mb-2">
       <a
         className="dropdown-item"
         href={`/service-type/${ tag.id }`}
