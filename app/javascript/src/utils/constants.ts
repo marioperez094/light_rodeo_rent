@@ -2,6 +2,8 @@ import { languageType } from "./types";
 
 export const logo: string = `https://${ process.env.PHOTO_UPLOAD_BUCKET }.s3.us-east-1.amazonaws.com/Logos+and+images/light_rodeo_logo.png`;
 
+export const email: string = `${ process.env.EMAIL_LINK }`
+
 export const translationText: {
   [key: string]: languageType;
 } ={ 

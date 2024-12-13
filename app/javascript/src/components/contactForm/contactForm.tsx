@@ -10,10 +10,9 @@ import { useLanguage } from "@context/language";
 //Types
 import { formFields } from "@utils/types";
 
-import { translationText } from "@utils/constants";
+import { translationText, email } from "@utils/constants";
 import { contactForm } from "@utils/formFields";
 import { phoneNumber } from "@utils/constants";
-
 
 export default function ContactForm({ 
   contact,
@@ -23,7 +22,6 @@ export default function ContactForm({
   setContact: ChangeEventHandler<HTMLInputElement>
 }) {
   const { language } = useLanguage();
-  const email = process.env.EMAIL_LINK;
   const { contactUs, contactFormWarning, submit } = translationText;
   
   return(
